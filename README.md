@@ -1,5 +1,5 @@
-# Welcome to the aokogo!  
-# aokogo is a simple game framework for CG (card game).
+# Welcome to the fohogo!  
+# aokogo is a simple game framework for arpg or rpg.
 
 ![](https://i.imgur.com/OUFzKJB.jpg)
 
@@ -24,14 +24,4 @@
   - Continually updated...
 ***
 
- 
-## Architecture diagram   
- 
-![Architecture](https://github.com/Peakchen/aoko/blob/master/src/note/pic/server_struct.png)
-
-## welcome everybody     
-![our_group](https://github.com/Peakchen/aoko/blob/master/src/note/pic/qq_group.png)
-
-## Buy me a coffee  
-![Buy me a coffee](https://github.com/Peakchen/aokogo/tree/master/src/note/pic/BuyMeACoffee.jpeg)
 
