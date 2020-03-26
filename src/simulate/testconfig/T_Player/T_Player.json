@@ -1,0 +1,43 @@
+[
+    {
+        "connAddr":"127.0.0.1:51001",
+        "module":"game",
+        "mainId": 11, 
+        "msg":[
+            {
+                "request":{
+                    "subId": 1, 
+                    "name": "CS_EnterServer_Req", 
+                    "params":{
+                      
+                    }
+                }, 
+
+                "response":{
+                    "subId": 2, 
+                    "name": "SC_EnterServer_Rsp", 
+                    "params":{
+
+                    }
+                }
+            },
+            {
+                "request":{
+                    "subId": 5, 
+                    "name": "CS_PlayerInfo_Req", 
+                    "params":{
+                        
+                    }
+                }, 
+
+                "response":{
+                    "subId": 6, 
+                    "name": "SC_PlayerInfo_Rsp", 
+                    "params":{
+                        
+                    }
+                }
+            }
+       ]
+    }
+]
