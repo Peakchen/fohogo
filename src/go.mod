@@ -8,17 +8,24 @@ go 1.12
 // go mod vendor 自动创建vendor 目录
 
 require (
-	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
+	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d
+	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
 	github.com/go-ole/go-ole v1.2.4 // indirect
-	github.com/golang/protobuf v1.3.3
+	github.com/golang/protobuf v1.4.0
 	github.com/gomodule/redigo v2.0.0+incompatible
+	github.com/gonutz/ide v0.0.0-20180502124734-e9fc8c14ed56
 	github.com/gorilla/websocket v1.4.1
 	github.com/klauspost/cpuid v1.2.3 // indirect
 	github.com/klauspost/reedsolomon v1.9.3 // indirect
 	github.com/kr/pretty v0.2.0 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/prometheus/client_golang v1.4.1
+	github.com/satori/go.uuid v1.2.0
 	github.com/shirou/gopsutil v2.20.2+incompatible
+	github.com/sony/sonyflake v1.0.0
 	github.com/templexxx/cpufeat v0.0.0-20180724012125-cef66df7f161 // indirect
 	github.com/templexxx/xor v0.0.0-20191217153810-f85b25db303b // indirect
 	github.com/tjfoc/gmsm v1.3.0 // indirect
@@ -28,6 +35,7 @@ require (
 	golang.org/x/crypto v0.0.0-20200204104054-c9f3fb736b72 // indirect
 	golang.org/x/net v0.0.0-20200202094626-16171245cfb2 // indirect
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
+	golang.org/x/sys v0.0.0-20200122134326-e047566fdf82
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
 
