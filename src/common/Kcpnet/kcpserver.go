@@ -8,17 +8,37 @@ import (
 	cli "github.com/urfave/cli"
 	"common/Log"
 	"sync"
+	"os"
+	"common/pprof"
+	"context"
 )
 
 type KcpServer struct {
-	sw sync.WaitGroup
+	sw 			sync.WaitGroup
+	svrName  	string
+	pack 		IMessagePack
+	addr		string
+	ppAddr		string
+	cancel    	context.CancelFunc
+}
 
+func NewKcpServer(Name string, addr string, pprofAddr string)*KcpServer{
+	return &KcpServer{
+		svrName: 	Name,
+		addr:		addr,
+		ppAddr:		pprofAddr,
+	}
 }
 
 func (this *KcpServer) Run(){
+	os.Setenv("GOTRACEBACK", "crash")
+
+	ctx, this.cancel = context.WithCancel(context.Background())
+	pprof.Run(ctx)
+
 	app := &cli.App{
-		Name:    "kcp session",
-		Usage:   "a gateway for games with stream multiplexing",
+		Name:    this.svrName,
+		Usage:   "a server...",
 		Version: "v1.0",
 		Flags: []cli.Flag{},
 		Action: func(c *cli.Context) error {
@@ -51,6 +71,8 @@ func (this *KcpServer) Run(){
 			this.sw.Wait()
 		}
 	}
+
+	app.Run(os.Args)
 }
 
 func (this *KcpServer) kcpAccept(c *KcpSvrConfig){
@@ -61,7 +83,6 @@ func (this *KcpServer) kcpAccept(c *KcpSvrConfig){
 
 	Log.FmtPrintln("kcp listening on:", l.Addr())
 	kcplis := l.(*kcp.Listener)
-
 	if err := kcplis.SetReadBuffer(c.sockbuf); err != nil {
 		panic(fmt.Errorf("SetReadBuffer, err: %v.", err))
 	}

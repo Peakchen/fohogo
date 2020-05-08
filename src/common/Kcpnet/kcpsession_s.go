@@ -20,13 +20,13 @@ type KcpServerSession struct {
 	pack 		IMessagePack
 }
 
-func NewKcpSvrSession(c *kcp.UDPSession, Msgpack IMessagePack) *KcpServerSession{
+func NewKcpSvrSession(c *kcp.UDPSession) *KcpServerSession{
 	return &KcpServerSession{
 		conn: c,
 		readCh: make(chan bool, 1000),
 		writeCh: make(chan []byte, 1000),
 		RemoteAddr: this.conn.RemoteAddr().String(),
-		pack: Msgpack,
+		pack: &KcpServerProtocol{},
 	}
 }
 
@@ -289,24 +289,4 @@ func (this *KcpServerSession) GetIdentify() string {
 
 func (this *KcpServerSession) GetRegPoint() (RegPoint Define.ERouteId) {
 	return this.RegPoint
-}
-
-func (this *KcpServerSession) GetRemoteAddr() string {
-	return this.RemoteAddr
-}
-
-func (this *KcpServerSession) IsUser() bool {
-	return this.RegPoint == 0
-}
-
-func (this *KcpServerSession) RefreshHeartBeat(mainid, subid uint16) bool {
-	if mainid == uint16(MSG_MainModule.MAINMSG_HEARTBEAT) &&
-		subid == uint16(MSG_HeartBeat.SUBMSG_CS_HeartBeat) {
-		this.heartBeatDeadline = aktime.Now().Unix()
-	}
-	return true
-}
-
-func (this *KcpServerSession) GetModuleName() string {
-	return this.Name
 }
