@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "welcome use aoko!"
+echo "welcome use fohogo!"
 
 go fmt ./src/...
 

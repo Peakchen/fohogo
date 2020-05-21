@@ -1,6 +1,6 @@
 @echo off
 
-echo "welcome use aoko!"
+echo "welcome use fohogo!"
 
 go fmt ./src/...
 
@@ -15,7 +15,5 @@ call .\\windows\\make_loginserver.bat
 ::call .\\windows\\make_simulate.bat
 
 call .\\windows\\make_dbserver.bat
-
-cd ..
 
 pause

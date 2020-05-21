@@ -107,7 +107,7 @@ func (this *TAokoMgo) GetMgoSession() (sess *mgo.Session, err error) {
 	defer this.Unlock()
 
 	if this.session == nil {
-		err = fmt.Errorf("aoko mongo session not get invalid.")
+		err = fmt.Errorf("foho mongo session not get invalid.")
 		return
 	}
 
@@ -126,7 +126,7 @@ func (this *TAokoMgo) getMgoSessionByChan() (sess *mgo.Session, err error) {
 	case <-time.After(time.Duration(1) * time.Second):
 	default:
 	}
-	return nil, fmt.Errorf("aoko mongo session time out and not get.")
+	return nil, fmt.Errorf("foho mongo session time out and not get.")
 }
 
 func MakeMgoModel(Identify, MainModel, SubModel string) string {
