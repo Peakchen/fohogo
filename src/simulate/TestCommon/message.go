@@ -1,10 +1,10 @@
 package TestCommon
 
 import (
-	"github.com/Peakchen/xgameCommon/akLog"
-	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"context"
 	"fmt"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"net"
 	"os"
 	"os/signal"

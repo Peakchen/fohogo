@@ -1,9 +1,9 @@
 package testconfig
 
 import (
+	"encoding/json"
 	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/utls"
-	"encoding/json"
 	"simulate/AutoTest/gameMsg"
 )
 

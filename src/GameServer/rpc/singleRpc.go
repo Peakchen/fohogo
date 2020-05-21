@@ -8,12 +8,13 @@ package rpc
 */
 
 import (
-	"github.com/Peakchen/xgameCommon/akLog"
-	"github.com/Peakchen/xgameCommon/Kcpnet"
-	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
-	"github.com/Peakchen/xgameCommon/msgProto/MSG_Rpc"
 	"encoding/json"
 	"reflect"
+
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Rpc"
 )
 
 type TRpcInfo struct {
@@ -63,7 +64,7 @@ func SendRpcMsg(session Kcpnet.TcpSession, module, funcName string, data interfa
 		return
 	}
 	rsp.Data = dst
-	session.SendInnerMsg(uint16(MSG_MainModule.MAINMSG_RPC),
+	session.SendInnerClientMsg(uint16(MSG_MainModule.MAINMSG_RPC),
 		uint16(MSG_Rpc.SUBMSG_CS_Rpc),
 		rsp)
 }

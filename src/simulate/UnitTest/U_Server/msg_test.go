@@ -1,8 +1,8 @@
 package U_Server
 
 import (
-	"github.com/Peakchen/xgameCommon/define"
 	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/define"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_Server"
 	"simulate/TestCommon"

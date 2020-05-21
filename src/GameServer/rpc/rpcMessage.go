@@ -8,8 +8,8 @@ package rpc
 */
 
 import (
-	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_Rpc"
 )

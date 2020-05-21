@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"reflect"
 )
 

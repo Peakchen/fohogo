@@ -1,9 +1,9 @@
 package U_Cache
 
 import (
+	"fmt"
 	"github.com/Peakchen/xgameCommon/Cache"
 	"github.com/Peakchen/xgameCommon/akLog"
-	"fmt"
 	"golang.org/x/sync/singleflight"
 	"sync"
 	"sync/atomic"

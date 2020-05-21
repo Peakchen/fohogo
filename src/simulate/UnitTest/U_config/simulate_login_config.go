@@ -1,10 +1,10 @@
 package U_config
 
 import (
+	"fmt"
 	"github.com/Peakchen/xgameCommon/Config"
 	"github.com/Peakchen/xgameCommon/define"
 	"github.com/Peakchen/xgameCommon/utls"
-	"fmt"
 )
 
 /*

@@ -1,11 +1,11 @@
 package U_Script
 
 import (
-	"github.com/Peakchen/xgameCommon/Config/serverConfig"
-	"github.com/Peakchen/xgameCommon/akLog"
-	"github.com/Peakchen/xgameCommon/RedisConn"
-	"github.com/Peakchen/xgameCommon/aktime"
 	"fmt"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/RedisConn"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/aktime"
 	"github.com/gomodule/redigo/redis"
 	"reflect"
 	"testing"

@@ -1,8 +1,8 @@
 package U_mongo
 
 import (
-	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/MgoConn"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
 	"testing"

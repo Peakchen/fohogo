@@ -6,8 +6,8 @@ package Player
 */
 import (
 	"GameServer/rpc"
-	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 const (

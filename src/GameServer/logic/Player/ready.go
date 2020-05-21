@@ -2,8 +2,8 @@ package Player
 
 import (
 	"GameServer/logic"
-	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 type TPlayerReady struct {

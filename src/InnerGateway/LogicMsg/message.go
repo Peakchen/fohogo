@@ -3,14 +3,16 @@
 package LogicMsg
 
 import (
-	"github.com/Peakchen/xgameCommon/define"
-	"github.com/Peakchen/xgameCommon/akLog"
+	"fmt"
+	"net"
+
 	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/akNet"
+	"github.com/Peakchen/xgameCommon/define"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_HeartBeat"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_Server"
-	"fmt"
-	"net"
 
 	"github.com/golang/protobuf/proto"
 )
@@ -27,7 +29,7 @@ func onSvrRegister(session Kcpnet.TcpSession, req *MSG_Server.CS_ServerRegister_
 
 	session.Push(define.ERouteId(req.ServerType))
 	for _, id := range req.Msgs {
-		mainid, subid := Kcpnet.DecodeCmd(uint32(id))
+		mainid, subid := akNet.DecodeCmd(uint32(id))
 		msgfmt += fmt.Sprintf("[mainid: %v, subid: %v]\t", mainid, subid)
 	}
 
@@ -37,7 +39,7 @@ func onSvrRegister(session Kcpnet.TcpSession, req *MSG_Server.CS_ServerRegister_
 	rsp := &MSG_Server.SC_ServerRegister_Rsp{}
 	rsp.Ret = MSG_Server.ErrorCode_Success
 	rsp.Identify = session.GetModuleName()
-	return session.SendInnerMsg(uint16(MSG_MainModule.MAINMSG_SERVER),
+	return session.SendInnerClientMsg(uint16(MSG_MainModule.MAINMSG_SERVER),
 		uint16(MSG_Server.SUBMSG_SC_ServerRegister),
 		rsp)
 }

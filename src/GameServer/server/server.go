@@ -6,14 +6,14 @@ import (
 	"GameServer/LogicMsg"
 	"GameServer/dbo"
 	"GameServer/rpc"
-	"github.com/Peakchen/xgameCommon/Config/LogicConfig"
-	"github.com/Peakchen/xgameCommon/Config/serverConfig"
-	"github.com/Peakchen/xgameCommon/define"
-	"github.com/Peakchen/xgameCommon/HotUpdate"
-	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
-	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"flag"
 	"syscall"
+
+	"github.com/Peakchen/xgameCommon/Config/LogicConfig"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/HotUpdate"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
 )
 
 func init() {
@@ -38,11 +38,9 @@ func StartServer() {
 		Recvsignal: syscall.SIGTERM,
 		HUCallback: reloadConfig,
 	})
-	gameSvr := Kcpnet.NewClient(Gamecfg.Listenaddr,
-		Gamecfg.Pprofaddr,
-		define.ERouteId_ER_Game,
-		nil,
-		Gamecfg.Name)
+	gameSvr := Kcpnet.NewKcpClient(Gamecfg.Name,
+		Gamecfg.Listenaddr,
+		Gamecfg.Pprofaddr)
 
 	gameSvr.Run()
 	dbStatistics.DBStatisticsStop()
