@@ -8,10 +8,10 @@ package rpc
 */
 
 import (
-	"common/Log"
-	"common/akNet"
-	"common/msgProto/MSG_MainModule"
-	"common/msgProto/MSG_Rpc"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Rpc"
 )
 
 func Init() {
@@ -23,8 +23,8 @@ func Init() {
 	@param1: session obj
 	@param2: req content (module, func, data)
 */
-func onRpcProcess(session akNet.TcpSession, req *MSG_Rpc.CS_Rpc_Req) (succ bool, err error) {
-	Log.FmtPrintf("rpc process, rpc module: %v, func: %v.", req.Rpcmodule, req.Rpcfunc)
+func onRpcProcess(session Kcpnet.TcpSession, req *MSG_Rpc.CS_Rpc_Req) (succ bool, err error) {
+	akLog.FmtPrintf("rpc process, rpc module: %v, func: %v.", req.Rpcmodule, req.Rpcfunc)
 	if len(req.Rpcmodule) == 0 {
 		succ, err = onSingleRpc(req.Rpcfunc, req.Data)
 	} else {
@@ -34,5 +34,5 @@ func onRpcProcess(session akNet.TcpSession, req *MSG_Rpc.CS_Rpc_Req) (succ bool,
 }
 
 func init() {
-	akNet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_RPC), uint16(MSG_Rpc.SUBMSG_CS_Rpc), onRpcProcess)
+	Kcpnet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_RPC), uint16(MSG_Rpc.SUBMSG_CS_Rpc), onRpcProcess)
 }

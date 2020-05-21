@@ -1,14 +1,14 @@
 package gameMsg
 
 import (
-	"common/Log"
-	"common/msgProto/MSG_MainModule"
-	"common/msgProto/MSG_Player"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Player"
 	"simulate/AutoTest/msgImp"
 )
 
 func Init() {
-	Log.FmtPrintln("run game player test.")
+	akLog.FmtPrintln("run game player test.")
 
 	msgImp.RegisterMsg(uint16(MSG_MainModule.MAINMSG_PLAYER),
 		uint16(MSG_Player.SUBMSG_CS_EnterServer),

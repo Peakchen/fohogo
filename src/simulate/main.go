@@ -3,11 +3,11 @@ package main
 // add by stefan
 
 import (
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"simulate/AutoTest"
 )
 
 func main() {
-	Log.FmtPrintf("main msg test.")
+	akLog.FmtPrintf("main msg test.")
 	AutoTest.Start()
 }

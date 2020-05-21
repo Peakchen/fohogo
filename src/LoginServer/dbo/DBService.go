@@ -1,11 +1,11 @@
 package dbo
 
 import (
-	"common/ado"
-	"common/ado/dbCache"
-	"common/ado/service"
-	"common/aktime"
-	"common/public"
+	"github.com/Peakchen/xgameCommon/ado"
+	"github.com/Peakchen/xgameCommon/ado/dbCache"
+	"github.com/Peakchen/xgameCommon/ado/service"
+	"github.com/Peakchen/xgameCommon/aktime"
+	"github.com/Peakchen/xgameCommon/public"
 )
 
 var (

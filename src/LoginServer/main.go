@@ -6,11 +6,11 @@ package main
 
 import (
 	"LoginServer/server"
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 func main() {
-	Log.FmtPrintln("start login server.")
+	akLog.FmtPrintln("start login server.")
 
 	server.StartServer()
 	return

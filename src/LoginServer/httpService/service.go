@@ -2,9 +2,9 @@ package httpService
 
 import (
 	"LoginServer/logindefine"
-	"common/httpExService"
-	"common/httpsExServiceTLS"
-	"common/tcpWebNet"
+	"github.com/Peakchen/xgameCommon/httpExService"
+	"github.com/Peakchen/xgameCommon/httpsExServiceTLS"
+	"github.com/Peakchen/xgameCommon/tcpWebNet"
 	"flag"
 	"log"
 )

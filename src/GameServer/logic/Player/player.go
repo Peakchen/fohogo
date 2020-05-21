@@ -5,9 +5,9 @@ package Player
 import (
 	"GameServer/dbo"
 	"GameServer/logic/LogicDef"
-	"common/Log"
-	"common/ado"
-	"common/msgProto/MSG_Player"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/ado"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Player"
 )
 
 /*
@@ -36,7 +36,7 @@ func GetPlayer(Identify string) (player *TPlayer) {
 	player = &TPlayer{}
 	err, exist := dbo.A_DBRead(Identify, player)
 	if err != nil {
-		Log.Error("can not read player data, err: ", err)
+		akLog.Error("can not read player data, err: ", err)
 		return
 	}
 
@@ -48,7 +48,7 @@ func GetPlayer(Identify string) (player *TPlayer) {
 		player.initdata()
 		err = dbo.A_DBInsert(Identify, player)
 		if err != nil {
-			Log.Error("can not insert player data, err: ", err)
+			akLog.Error("can not insert player data, err: ", err)
 			return
 		}
 	}

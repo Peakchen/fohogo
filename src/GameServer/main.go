@@ -4,7 +4,7 @@ package main
 
 import (
 	"GameServer/server"
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 	//"log"
 )
 
@@ -13,7 +13,7 @@ func init() {
 }
 
 func main() {
-	Log.FmtPrintf("start gameServer.")
+	akLog.FmtPrintf("start gameServer.")
 
 	server.StartServer()
 	return

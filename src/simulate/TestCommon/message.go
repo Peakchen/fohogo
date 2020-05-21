@@ -1,8 +1,8 @@
 package TestCommon
 
 import (
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"context"
 	"fmt"
 	"net"
@@ -22,7 +22,7 @@ type TModuleCommon struct {
 	cancle     context.CancelFunc
 	data       []byte
 	module     string
-	clientPack akNet.IMessagePack
+	clientPack Kcpnet.IMessagePack
 }
 
 var exitchan = make(chan os.Signal, 1)
@@ -31,7 +31,7 @@ func NewModule(host, module string) *TModuleCommon {
 	return &TModuleCommon{
 		host:       host,
 		module:     module,
-		clientPack: &akNet.ClientProtocol{},
+		clientPack: &Kcpnet.ClientProtocol{},
 		data:       make([]byte, 1024),
 	}
 }
@@ -40,12 +40,12 @@ func (this *TModuleCommon) PushMsg(mainid, subid uint16, msg proto.Message) {
 	this.clientPack.SetIdentify(this.host)
 	buff, err := this.clientPack.PackMsg4Client(mainid, subid, msg)
 	if err != nil {
-		Log.Error(err)
+		akLog.Error(err)
 		return
 	}
 	this.data = make([]byte, len(buff))
 	copy(this.data, buff)
-	Log.FmtPrintln("msg len: ", len(this.data))
+	akLog.FmtPrintln("msg len: ", len(this.data))
 }
 
 func (this *TModuleCommon) Run() {
@@ -64,10 +64,10 @@ func (this *TModuleCommon) sender(conn net.Conn) (succ bool) {
 	}
 	n, err := conn.Write(this.data)
 	if n == 0 || err != nil {
-		//Log.Error("Write fail, data: ", n, err)
+		//akLog.Error("Write fail, data: ", n, err)
 		return false
 	}
-	Log.FmtPrintln("send over")
+	akLog.FmtPrintln("send over")
 	succ = true
 	return
 }
@@ -83,21 +83,21 @@ func (this *TModuleCommon) readloop(conn net.Conn) {
 			buffer := make([]byte, 1024)
 			n, err := conn.Read(buffer)
 			if err != nil || n == 0 {
-				//Log.Error("waiting server back msg error: ", conn.RemoteAddr().String(), err)
+				//akLog.Error("waiting server back msg error: ", conn.RemoteAddr().String(), err)
 				continue
 			}
 
 			_, err = this.clientPack.UnPackMsg4Client(buffer)
 			if err != nil {
-				Log.Error("unpack action err: ", err)
+				akLog.Error("unpack action err: ", err)
 				return
 			}
 
 			route := this.clientPack.GetRouteID()
-			Log.FmtPrintln("pack route: ", route)
+			akLog.FmtPrintln("pack route: ", route)
 			mainID, subID := this.clientPack.GetMessageID()
-			Log.FmtPrintf("mainid: %v, subID: %v.", mainID, subID)
-			Log.FmtPrintf("receive server back, ip: %v.", conn.RemoteAddr().String())
+			akLog.FmtPrintf("mainid: %v, subID: %v.", mainID, subID)
+			akLog.FmtPrintf("receive server back, ip: %v.", conn.RemoteAddr().String())
 		}
 	}
 
@@ -106,12 +106,12 @@ func (this *TModuleCommon) readloop(conn net.Conn) {
 func (this *TModuleCommon) sendloop(conn net.Conn) {
 	tcpAddr, err := net.ResolveTCPAddr("tcp4", this.host)
 	if err != nil {
-		Log.FmtPrintf("Fatal error: %s", err.Error())
+		akLog.FmtPrintf("Fatal error: %s", err.Error())
 		os.Exit(1)
 	}
 
 	for i := 0; i < 1; i++ {
-		Log.FmtPrintln("time: ", i)
+		akLog.FmtPrintln("time: ", i)
 		if !this.sender(conn) {
 			tick := time.NewTicker(time.Duration(3 * time.Second))
 			for {
@@ -119,8 +119,8 @@ func (this *TModuleCommon) sendloop(conn net.Conn) {
 				case <-tick.C:
 					conn, err = net.DialTCP("tcp", nil, tcpAddr)
 					if err != nil {
-						Log.FmtPrintf("dial to server, host: %v.", this.host)
-						//Log.Error("err: ", err.Error())
+						akLog.FmtPrintf("dial to server, host: %v.", this.host)
+						//akLog.Error("err: ", err.Error())
 						continue
 					}
 					break
@@ -137,18 +137,18 @@ func (this *TModuleCommon) sendloop(conn net.Conn) {
 func (this *TModuleCommon) dialSend() {
 	tcpAddr, err := net.ResolveTCPAddr("tcp4", this.host)
 	if err != nil {
-		//Log.Error("resolve error: %s", err.Error())
+		//akLog.Error("resolve error: %s", err.Error())
 		return
 	}
 
 	conn, err := net.DialTCP("tcp", nil, tcpAddr)
 	if err != nil {
-		//Log.Error("dial error: %s", err.Error())
+		//akLog.Error("dial error: %s", err.Error())
 		return
 	}
 
 	this.ctx, this.cancle = context.WithCancel(context.Background())
-	Log.FmtPrintln("connection success")
+	akLog.FmtPrintln("connection success")
 	signal.Notify(exitchan, os.Interrupt, os.Kill, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT, syscall.SIGKILL, syscall.SIGSEGV)
 
 	this.sw.Add(3)
@@ -161,18 +161,18 @@ func (this *TModuleCommon) dialSend() {
 func (this *TModuleCommon) sendDirectNoRecv() {
 	tcpAddr, err := net.ResolveTCPAddr("tcp4", this.host)
 	if err != nil {
-		//Log.Error("resolve error: %s", err.Error())
+		//akLog.Error("resolve error: %s", err.Error())
 		return
 	}
 
 	conn, err := net.DialTCP("tcp", nil, tcpAddr)
 	if err != nil {
-		//Log.Error("dial error: %s", err.Error())
+		//akLog.Error("dial error: %s", err.Error())
 		return
 	}
 
 	this.ctx, this.cancle = context.WithCancel(context.Background())
-	Log.FmtPrintln("connection success")
+	akLog.FmtPrintln("connection success")
 	signal.Notify(exitchan, os.Interrupt, os.Kill, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT, syscall.SIGKILL, syscall.SIGSEGV)
 
 	go this.readloop(conn)

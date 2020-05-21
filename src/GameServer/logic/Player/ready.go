@@ -2,18 +2,18 @@ package Player
 
 import (
 	"GameServer/logic"
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 )
 
 type TPlayerReady struct {
 }
 
-func (this *TPlayerReady) EnterReady(session akNet.TcpSession) {
-	Log.FmtPrintln("enter ready.")
+func (this *TPlayerReady) EnterReady(session Kcpnet.TcpSession) {
+	akLog.FmtPrintln("enter ready.")
 	player := GetPlayer(session.GetIdentify())
 	if player == nil {
-		Log.Error("can not find ")
+		akLog.Error("can not find ")
 		return
 	}
 
@@ -22,11 +22,11 @@ func (this *TPlayerReady) EnterReady(session akNet.TcpSession) {
 	//RunRpc4GetPlayerInfoTest(session, cstRpcFunc_GetPlayerInfo)
 }
 
-func (this *TPlayerReady) LeaveReady(session akNet.TcpSession) {
+func (this *TPlayerReady) LeaveReady(session Kcpnet.TcpSession) {
 
 }
 
-func (this *TPlayerReady) ReconnectReady(session akNet.TcpSession) {
+func (this *TPlayerReady) ReconnectReady(session Kcpnet.TcpSession) {
 
 }
 

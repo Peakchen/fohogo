@@ -1,7 +1,7 @@
 package U_Statistics
 
 import (
-	"common/ado/dbStatistics"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
 	"testing"
 	"time"
 )

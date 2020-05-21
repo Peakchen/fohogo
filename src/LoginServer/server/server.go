@@ -3,11 +3,11 @@ package server
 import (
 	"LoginServer/LogicMsg"
 	"LoginServer/dbo"
-	"common/Config/serverConfig"
-	"common/Define"
-	"common/Log"
-	"common/ado/dbStatistics"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/define"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"flag"
 )
 
@@ -20,13 +20,13 @@ func init() {
 }
 
 func StartServer() {
-	Log.FmtPrintf("start Login server.")
+	akLog.FmtPrintf("start Login server.")
 	logincfg := serverConfig.GLoginconfigConfig.Get()
 	server := logincfg.Zone + logincfg.No
 	dbo.StartDBSerice(server)
-	gameSvr := akNet.NewClient(logincfg.Listenaddr,
+	gameSvr := Kcpnet.NewClient(logincfg.Listenaddr,
 		logincfg.Pprofaddr,
-		Define.ERouteId_ER_Login,
+		define.ERouteId_ER_Login,
 		nil,
 		logincfg.Name)
 

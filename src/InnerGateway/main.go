@@ -6,9 +6,9 @@ import (
 	"InnerGateway/ado"
 	"InnerGateway/client"
 	"InnerGateway/server"
-	"common/Config/serverConfig"
-	"common/Log"
-	"common/ado/dbStatistics"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
 	"flag"
 	"sync"
 )
@@ -30,7 +30,7 @@ func startInnerGW() {
 }
 
 func main() {
-	Log.FmtPrintf("start InnerGateway.")
+	akLog.FmtPrintf("start InnerGateway.")
 	ado.StartDBSerice("InnerGateway")
 	startInnerGW()
 	dbStatistics.DBStatisticsStop()

@@ -3,12 +3,12 @@
 package c2s_message
 
 import (
-	//"common/C2SMessage"
+	//"github.com/Peakchen/xgameCommon/C2SMessage"
 	//"github.com/gorilla/websocket"
 	//"github.com/protobuf/proto"
 	"log"
 	"net/http"
-	//"common/define"
+	//"github.com/Peakchen/xgameCommon/define"
 )
 
 const (

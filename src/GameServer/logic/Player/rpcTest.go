@@ -6,8 +6,8 @@ package Player
 */
 import (
 	"GameServer/rpc"
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 )
 
 const (
@@ -26,10 +26,10 @@ type TPlayerUpdateRpc struct {
 }
 
 func (this *TPlayerUpdateRpc) GetPlayerInfo(info *TPlayerInfoTest) {
-	Log.FmtPrintln("recv module rpc msg, info content: ", info.Content)
+	akLog.FmtPrintln("recv module rpc msg, info content: ", info.Content)
 }
 
-func RunModuleRpc4GetPlayerInfoTest(session akNet.TcpSession, module, funcName string) {
+func RunModuleRpc4GetPlayerInfoTest(session Kcpnet.TcpSession, module, funcName string) {
 	info := &TPlayerInfoTest{
 		Content: "hi，stefan.",
 	}
@@ -37,7 +37,7 @@ func RunModuleRpc4GetPlayerInfoTest(session akNet.TcpSession, module, funcName s
 	rpc.SendRpcMsg(session, module, funcName, info)
 }
 
-func RunRpc4GetPlayerInfoTest(session akNet.TcpSession, funcName string) {
+func RunRpc4GetPlayerInfoTest(session Kcpnet.TcpSession, funcName string) {
 	info := &TPlayerInfoTest{
 		Content: "hi，stefan.",
 	}
@@ -46,7 +46,7 @@ func RunRpc4GetPlayerInfoTest(session akNet.TcpSession, funcName string) {
 }
 
 func GetPlayerInfo(info *TPlayerInfoTest) {
-	Log.FmtPrintln("recv single rpc msg, info content: ", info.Content)
+	akLog.FmtPrintln("recv single rpc msg, info content: ", info.Content)
 }
 
 func init() {

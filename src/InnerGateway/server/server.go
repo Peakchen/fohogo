@@ -1,18 +1,18 @@
 package server
 
 import (
-	"common/Config/serverConfig"
-	"common/Define"
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/define"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 )
 
 func StartServer() {
-	Log.FmtPrintf("start InnerGateway server.")
+	akLog.FmtPrintf("start InnerGateway server.")
 	Innergw := serverConfig.GInnergwconfigConfig.Get()
-	newInnerServer := akNet.NewTcpServer(Innergw.Listenaddr,
+	newInnerServer := Kcpnet.NewTcpServer(Innergw.Listenaddr,
 		Innergw.Pprofaddr,
-		Define.ERouteId_ER_ISG,
+		define.ERouteId_ER_ISG,
 		Innergw.Name)
 
 	newInnerServer.Run()

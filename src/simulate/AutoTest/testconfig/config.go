@@ -1,8 +1,8 @@
 package testconfig
 
 import (
-	"common/Log"
-	"common/utls"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/utls"
 	"encoding/json"
 	"simulate/AutoTest/gameMsg"
 )
@@ -35,7 +35,7 @@ func (this *TMsgDetial) UnmarshalJSON(data []byte) (err error) {
 	dst := &TMsgOper{}
 	err = json.Unmarshal(data, &dst)
 	if err != nil {
-		Log.Error("unmarshal nsg fail, err: ", err)
+		akLog.Error("unmarshal nsg fail, err: ", err)
 		return
 	}
 
@@ -56,7 +56,7 @@ func (this *TMsg) UnmarshalJSON(data []byte) (err error) {
 	dst := &tArrMsgDetial{}
 	err = json.Unmarshal(data, &dst)
 	if err != nil {
-		Log.Error("unmarshal nsg fail, err: ", err)
+		akLog.Error("unmarshal nsg fail, err: ", err)
 		return
 	}
 

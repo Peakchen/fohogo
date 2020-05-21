@@ -1,10 +1,10 @@
 package U_Script
 
 import (
-	"common/Config/serverConfig"
-	"common/Log"
-	"common/RedisConn"
-	"common/aktime"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/RedisConn"
+	"github.com/Peakchen/xgameCommon/aktime"
 	"fmt"
 	"github.com/gomodule/redigo/redis"
 	"reflect"
@@ -59,7 +59,7 @@ func TestScript(t *testing.T) {
 	}
 
 	if len(params) > 0 {
-		Log.FmtPrintf("run script params: %v.", params)
+		akLog.FmtPrintf("run script params: %v.", params)
 	}
 
 }
@@ -106,7 +106,7 @@ func TestScript1(t *testing.T) {
 	}
 
 	if len(params) > 0 {
-		Log.FmtPrintf("run script params: %v.", params)
+		akLog.FmtPrintf("run script params: %v.", params)
 	}
 
 	getkeys, err := c.Do("HKEYS", commonkey)
@@ -118,10 +118,10 @@ func TestScript1(t *testing.T) {
 		dstkey := string(k.([]byte))
 		dstval, err := c.Do("GET", dstkey)
 		if err != nil {
-			Log.FmtPrintln("get fail, err: ", err)
+			akLog.FmtPrintln("get fail, err: ", err)
 			continue
 		}
 
-		Log.FmtPrintf("save val: %v. ", string(dstval.([]byte)))
+		akLog.FmtPrintf("save val: %v. ", string(dstval.([]byte)))
 	}
 }

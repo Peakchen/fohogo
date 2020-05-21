@@ -1,9 +1,9 @@
 package U_config
 
 import (
-	"common/Config"
-	"common/Define"
-	"common/utls"
+	"github.com/Peakchen/xgameCommon/Config"
+	"github.com/Peakchen/xgameCommon/define"
+	"github.com/Peakchen/xgameCommon/utls"
 	"fmt"
 )
 
@@ -15,10 +15,10 @@ type TSimulateLoginBase struct {
 	Passwd      string               `json:"passwd"`
 	Register    int32                `json:"register"`
 	Login       int32                `json:"login"`
-	List        Define.Int32Array    `json:"list"`
-	List2D      Define.Int32Array2D  `json:"list2D"`
-	Property    Define.Property      `json:"property"`
-	PropertyArr Define.PropertyArray `json:"propertylist"`
+	List        define.Int32Array    `json:"list"`
+	List2D      define.Int32Array2D  `json:"list2D"`
+	Property    define.Property      `json:"property"`
+	PropertyArr define.PropertyArray `json:"propertylist"`
 }
 
 const (
@@ -48,7 +48,7 @@ func getloginfile() (realfilename string) {
 }
 
 func init() {
-	Config.ParseJson2Cache(GloginConfig, &tArrSimulateLogin{}, getloginfile())
+	ParseJson2Cache(GloginConfig, &tArrSimulateLogin{}, getloginfile())
 }
 
 func (this *TSimulateLoginConfig) ComfireAct(data interface{}) (errlist []string) {

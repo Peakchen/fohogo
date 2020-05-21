@@ -2,20 +2,20 @@ package LogicMsg
 
 import (
 	"LoginServer/Logic/UserAccount"
-	"common/Log"
-	"common/akNet"
-	"common/msgProto/MSG_Login"
-	"common/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Login"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
 )
 
 func onUserBind(key string, req *MSG_Login.CS_UserBind_Req) (succ bool, err error) {
-	Log.FmtPrintf("onUserBind recv: %v, %v.", key, req.Account, req.Passwd)
+	akLog.FmtPrintf("onUserBind recv: %v, %v.", key, req.Account, req.Passwd)
 
 	return
 }
 
-func onUserRegister(session akNet.TcpSession, req *MSG_Login.CS_UserRegister_Req) (succ bool, err error) {
-	Log.FmtPrintf("[onUserRegister] name: %v, identify: %v, Account: %v, Passwd: %v, DeviceSerial: %v, DeviceName: %v.", session.GetModuleName(), session.GetIdentify(), req.Account, req.Passwd, req.DeviceSerial, req.DeviceName)
+func onUserRegister(session Kcpnet.TcpSession, req *MSG_Login.CS_UserRegister_Req) (succ bool, err error) {
+	akLog.FmtPrintf("[onUserRegister] name: %v, identify: %v, Account: %v, Passwd: %v, DeviceSerial: %v, DeviceName: %v.", session.GetModuleName(), session.GetIdentify(), req.Account, req.Passwd, req.DeviceSerial, req.DeviceName)
 	rsp := &MSG_Login.SC_UserRegister_Rsp{}
 	rsp.Ret = MSG_Login.ErrorCode_Success
 
@@ -37,8 +37,8 @@ func onUserRegister(session akNet.TcpSession, req *MSG_Login.CS_UserRegister_Req
 		rsp)
 }
 
-func onUserLogin(session akNet.TcpSession, req *MSG_Login.CS_Login_Req) (succ bool, err error) {
-	Log.FmtPrintf("[onUserLogin] identify: %v, Account: %v, Passwd: %v, DeviceSerial: %v, DeviceName: %v.", session.GetIdentify(), req.Account, req.Passwd, req.DeviceSerial, req.DeviceName)
+func onUserLogin(session Kcpnet.TcpSession, req *MSG_Login.CS_Login_Req) (succ bool, err error) {
+	akLog.FmtPrintf("[onUserLogin] identify: %v, Account: %v, Passwd: %v, DeviceSerial: %v, DeviceName: %v.", session.GetIdentify(), req.Account, req.Passwd, req.DeviceSerial, req.DeviceName)
 
 	rsp := &MSG_Login.SC_Login_Rsp{}
 	rsp.Ret = MSG_Login.ErrorCode_Success
@@ -60,7 +60,7 @@ func onUserLogin(session akNet.TcpSession, req *MSG_Login.CS_Login_Req) (succ bo
 }
 
 func init() {
-	akNet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_LOGIN), uint16(MSG_Login.SUBMSG_CS_UserBind), onUserBind)
-	akNet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_LOGIN), uint16(MSG_Login.SUBMSG_CS_UserRegister), onUserRegister)
-	akNet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_LOGIN), uint16(MSG_Login.SUBMSG_CS_Login), onUserLogin)
+	Kcpnet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_LOGIN), uint16(MSG_Login.SUBMSG_CS_UserBind), onUserBind)
+	Kcpnet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_LOGIN), uint16(MSG_Login.SUBMSG_CS_UserRegister), onUserRegister)
+	Kcpnet.RegisterMessage(uint16(MSG_MainModule.MAINMSG_LOGIN), uint16(MSG_Login.SUBMSG_CS_Login), onUserLogin)
 }

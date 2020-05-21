@@ -1,7 +1,7 @@
 package U_Stack
 
 import (
-	"common/stacktrace"
+	"github.com/Peakchen/xgameCommon/stacktrace"
 	"testing"
 )
 

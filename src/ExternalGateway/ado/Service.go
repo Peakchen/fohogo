@@ -1,9 +1,9 @@
 package ado
 
 import (
-	"common/ado/dbCache"
-	"common/ado/service"
-	"common/aktime"
+	"github.com/Peakchen/xgameCommon/ado/dbCache"
+	"github.com/Peakchen/xgameCommon/ado/service"
+	"github.com/Peakchen/xgameCommon/aktime"
 )
 
 var (

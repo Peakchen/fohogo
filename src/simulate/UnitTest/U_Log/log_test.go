@@ -1,14 +1,14 @@
 package U_Log
 
 import (
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"sync"
 	"testing"
 )
 
 func TestLogNormal(t *testing.T) {
-	Log.FmtPrintln("test log: ", "yes")
-	Log.Error("test error.")
+	akLog.FmtPrintln("test log: ", "yes")
+	akLog.Error("test error.")
 }
 
 func TestLogLoopWrite(t *testing.T) {
@@ -16,7 +16,7 @@ func TestLogLoopWrite(t *testing.T) {
 	wg.Add(1)
 	go func() {
 		for i := 0; i < 100; i++ {
-			Log.Info("info, idx: %v.", i)
+			akLog.Info("info, idx: %v.", i)
 		}
 	}()
 

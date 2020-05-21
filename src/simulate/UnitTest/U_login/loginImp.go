@@ -1,9 +1,9 @@
 package U_login
 
 import (
-	"common/Log"
-	"common/msgProto/MSG_Login"
-	"common/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Login"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
 	"simulate/TestCommon"
 	"simulate/UnitTest/U_config"
 	"time"
@@ -23,7 +23,7 @@ func Run(idx int) {
 }
 
 func UserRegister(idx int) {
-	Log.FmtPrintf("user register.")
+	akLog.FmtPrintf("user register.")
 	simulateItems := U_config.GloginConfig.Get()
 	if len(simulateItems) == idx {
 		return
@@ -36,7 +36,7 @@ func UserRegister(idx int) {
 		req.Passwd = item.Passwd
 		req.DeviceSerial = "123"
 		req.DeviceName = "androd"
-		Log.FmtPrintln("UserRegister: ", item.Username, item.Passwd)
+		akLog.FmtPrintln("UserRegister: ", item.Username, item.Passwd)
 		loginM.PushMsg(uint16(MSG_MainModule.MAINMSG_LOGIN),
 			uint16(MSG_Login.SUBMSG_CS_UserRegister),
 			req)
@@ -48,7 +48,7 @@ func UserRegister(idx int) {
 }
 
 func UserLogin(item *U_config.TSimulateLoginBase) {
-	Log.FmtPrintf("user login.")
+	akLog.FmtPrintf("user login.")
 	if item.Login == U_config.CstLogin_No {
 		return
 	}
@@ -58,7 +58,7 @@ func UserLogin(item *U_config.TSimulateLoginBase) {
 	req.Passwd = item.Passwd
 	req.DeviceSerial = "456"
 	req.DeviceName = "iso"
-	Log.FmtPrintln("UserLogin: ", item.Username, item.Passwd)
+	akLog.FmtPrintln("UserLogin: ", item.Username, item.Passwd)
 	loginM.PushMsg(uint16(MSG_MainModule.MAINMSG_LOGIN),
 		uint16(MSG_Login.SUBMSG_CS_Login),
 		req)

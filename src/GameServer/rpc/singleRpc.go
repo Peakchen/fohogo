@@ -8,10 +8,10 @@ package rpc
 */
 
 import (
-	"common/Log"
-	"common/akNet"
-	"common/msgProto/MSG_MainModule"
-	"common/msgProto/MSG_Rpc"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Rpc"
 	"encoding/json"
 	"reflect"
 )
@@ -33,7 +33,7 @@ var (
 func RegisterRpc(name string, funcName interface{}) {
 	f := reflect.ValueOf(funcName)
 	if f.Kind() != reflect.Func {
-		Log.Error("func name: ", name, " which is not func type.")
+		akLog.Error("func name: ", name, " which is not func type.")
 		return
 	}
 
@@ -53,13 +53,13 @@ func RegisterRpc(name string, funcName interface{}) {
 	@param1: session obj
 	@param2: module, func, data
 */
-func SendRpcMsg(session akNet.TcpSession, module, funcName string, data interface{}) {
+func SendRpcMsg(session Kcpnet.TcpSession, module, funcName string, data interface{}) {
 	rsp := &MSG_Rpc.CS_Rpc_Req{}
 	rsp.Rpcmodule = module
 	rsp.Rpcfunc = funcName
 	dst, err := json.Marshal(data)
 	if err != nil {
-		Log.Error("rpc msg marshal fail, info: ", module, funcName)
+		akLog.Error("rpc msg marshal fail, info: ", module, funcName)
 		return
 	}
 	rsp.Data = dst
@@ -76,14 +76,14 @@ func SendRpcMsg(session akNet.TcpSession, module, funcName string, data interfac
 func onSingleRpc(Rpcfunc string, data []byte) (succ bool, err error) {
 	module := _rpcMap[Rpcfunc]
 	if module == nil {
-		Log.Error("can not find rpc module: ", Rpcfunc)
+		akLog.Error("can not find rpc module: ", Rpcfunc)
 		return
 	}
 
 	dst := reflect.New(module.args[0].Elem()).Interface()
 	err = json.Unmarshal(data, dst)
 	if err != nil {
-		Log.Error("unmarshal data fail, Rpcfunc: ", Rpcfunc)
+		akLog.Error("unmarshal data fail, Rpcfunc: ", Rpcfunc)
 		return
 	}
 

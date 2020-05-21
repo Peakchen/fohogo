@@ -3,7 +3,7 @@
 package c2smessage
 
 import (
-	"common/C2SMessage"
+	"github.com/Peakchen/xgameCommon/C2SMessage"
 	"log"
 
 	"github.com/gorilla/websocket"

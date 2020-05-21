@@ -9,7 +9,7 @@ import (
 	"fmt"
 
 	//"log"
-	"common/tcpWebNet"
+	"github.com/Peakchen/xgameCommon/tcpWebNet"
 )
 
 func init() {

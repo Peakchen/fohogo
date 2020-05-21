@@ -1,18 +1,18 @@
 package client
 
 import (
-	"common/Config/serverConfig"
-	"common/Define"
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/define"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 )
 
 func StartClient() {
-	Log.FmtPrintf("start InnerGateway client.")
+	akLog.FmtPrintf("start InnerGateway client.")
 	Innergw := serverConfig.GInnergwconfigConfig.Get()
-	gameSvr := akNet.NewClient(Innergw.Connectaddr,
+	gameSvr := Kcpnet.NewClient(Innergw.Connectaddr,
 		Innergw.Pprofaddr,
-		Define.ERouteId_ER_ISG,
+		define.ERouteId_ER_ISG,
 		nil,
 		Innergw.Name)
 

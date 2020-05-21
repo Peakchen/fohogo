@@ -3,8 +3,8 @@ package AutoTest
 // add by stefan
 
 import (
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"encoding/json"
 	"io/ioutil"
 	"reflect"
@@ -74,14 +74,14 @@ func (this *TAokoTest) runItem(idx int) {
 func (this *TAokoTest) loadConnCheck(dir, fileName string) {
 	fileobj, err := ioutil.ReadFile(_testCfgPath + dir + fileName)
 	if err != nil {
-		Log.Error("read config fail, info: ", fileName, err)
+		akLog.Error("read config fail, info: ", fileName, err)
 		return
 	}
 
 	data := &testconfig.TArrGateWay{}
 	err = json.Unmarshal(fileobj, &data)
 	if err != nil {
-		Log.Error("unmarshal config fail, info: ", fileName, err)
+		akLog.Error("unmarshal config fail, info: ", fileName, err)
 		return
 	}
 
@@ -93,7 +93,7 @@ func (this *TAokoTest) loadTestCheck() {
 
 	rd, err := ioutil.ReadDir(_testCfgPath)
 	if err != nil {
-		Log.Error("read test config path fail, err: ", err)
+		akLog.Error("read test config path fail, err: ", err)
 		return
 	}
 
@@ -104,7 +104,7 @@ func (this *TAokoTest) loadTestCheck() {
 
 		testrd, err := ioutil.ReadDir(_testCfgPath + file.Name())
 		if err != nil {
-			Log.Error("read test config path fail, err: ", err)
+			akLog.Error("read test config path fail, err: ", err)
 			return
 		}
 
@@ -126,7 +126,7 @@ func (this *TAokoTest) loadTestCheck() {
 
 		fileobj, err := ioutil.ReadFile(_testCfgPath + file.Name() + "/" + fileName)
 		if err != nil {
-			Log.Error("read config fail, info: ", fileName, err)
+			akLog.Error("read config fail, info: ", fileName, err)
 			return
 		}
 
@@ -134,7 +134,7 @@ func (this *TAokoTest) loadTestCheck() {
 		data := &testconfig.TArrConfig4Test{}
 		err = json.Unmarshal(fileobj, &data)
 		if err != nil {
-			Log.Error("unmarshal config fail, info: ", fileName, err)
+			akLog.Error("unmarshal config fail, info: ", fileName, err)
 			return
 		}
 
@@ -163,14 +163,14 @@ func (this *TAokoTest) Run(data testconfig.TArrConfig4Test) {
 			SubId := Item.Request.SubId
 			Req := Item.Request.Name
 			Params := Item.Request.Params
-			Log.FmtPrintln("data: ", mainId, SubId, Req, Params)
+			akLog.FmtPrintln("data: ", mainId, SubId, Req, Params)
 			byparams, err := json.Marshal(Params)
 			if err != nil {
-				Log.Error("json marshal fail, err: ", err)
+				akLog.Error("json marshal fail, err: ", err)
 				continue
 			}
 
-			_cmd := akNet.EncodeCmd(uint16(mainId), uint16(SubId))
+			_cmd := Kcpnet.EncodeCmd(uint16(mainId), uint16(SubId))
 			PbItem, exist := msgImp.GetMsgPb(_cmd)
 			if !exist {
 				continue
@@ -183,7 +183,7 @@ func (this *TAokoTest) Run(data testconfig.TArrConfig4Test) {
 
 			err = json.Unmarshal(byparams, dst)
 			if err != nil {
-				Log.Error("proto Unmarshal fail, err: ", err)
+				akLog.Error("proto Unmarshal fail, err: ", err)
 				continue
 			}
 
@@ -192,7 +192,7 @@ func (this *TAokoTest) Run(data testconfig.TArrConfig4Test) {
 				uint16(SubId),
 				dstpb)
 
-			Log.FmtPrintln("pb: ", dstpb)
+			akLog.FmtPrintln("pb: ", dstpb)
 			go pack.Run()
 		}
 	}

@@ -1,7 +1,7 @@
 package U_Net
 
 import (
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"net"
 	"testing"
 )
@@ -10,13 +10,13 @@ import (
 func Test_1(t *testing.T) {
 	addrs, err := net.LookupHost("www.baidu.com")
 	if err != nil {
-		Log.FmtPrintf("Err: %s", err.Error())
+		akLog.FmtPrintf("Err: %s", err.Error())
 		return
 	}
 
 	for _, addr := range addrs {
 		if net.ParseIP(addr) != nil {
-			Log.FmtPrintf("A literal IP address, addr: %s.", addr)
+			akLog.FmtPrintf("A literal IP address, addr: %s.", addr)
 		}
 	}
 }

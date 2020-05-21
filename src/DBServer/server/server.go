@@ -3,9 +3,9 @@ package server
 // add by stefan
 
 import (
-	"common/Config/serverConfig"
-	"common/ado/dbStatistics"
-	"common/ado/service"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
+	"github.com/Peakchen/xgameCommon/ado/service"
 	"flag"
 )
 

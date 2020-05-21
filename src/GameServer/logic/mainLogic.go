@@ -1,18 +1,18 @@
 package logic
 
 import (
-	"common/Log"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"reflect"
 )
 
 // after player login, need getting ready.
-func EnterGameReady(session akNet.TcpSession) {
+func EnterGameReady(session Kcpnet.TcpSession) {
 	params := []reflect.Value{reflect.ValueOf(session)}
 	for module, obj := range GEnterReadyModule {
 		enter := reflect.ValueOf(obj).MethodByName("EnterReady")
 		if enter.IsNil() || !enter.IsValid() {
-			Log.ErrorIDCard(session.GetIdentify(), "can not find EnterReady method, module: ", module)
+			akLog.ErrorIDCard(session.GetIdentify(), "can not find EnterReady method, module: ", module)
 			return
 		}
 
@@ -21,12 +21,12 @@ func EnterGameReady(session akNet.TcpSession) {
 }
 
 //before leave, get ready.
-func LeaveGameReady(session akNet.TcpSession) {
+func LeaveGameReady(session Kcpnet.TcpSession) {
 	params := []reflect.Value{reflect.ValueOf(session)}
 	for module, obj := range GLeaveReadyModule {
 		enter := reflect.ValueOf(obj).MethodByName("LeaveReady")
 		if enter.IsNil() || !enter.IsValid() {
-			Log.ErrorIDCard(session.GetIdentify(), "can not find LeaveReady method, module: ", module)
+			akLog.ErrorIDCard(session.GetIdentify(), "can not find LeaveReady method, module: ", module)
 			return
 		}
 
@@ -35,12 +35,12 @@ func LeaveGameReady(session akNet.TcpSession) {
 }
 
 //broken link reconnct enter game ready.
-func ReconnectEnterReady(session akNet.TcpSession) {
+func ReconnectEnterReady(session Kcpnet.TcpSession) {
 	params := []reflect.Value{reflect.ValueOf(session)}
 	for module, obj := range GReconnReadyModule {
 		enter := reflect.ValueOf(obj).MethodByName("ReconnectReady")
 		if enter.IsNil() || !enter.IsValid() {
-			Log.ErrorIDCard(session.GetIdentify(), "can not find ReconnectReady method, module: ", module)
+			akLog.ErrorIDCard(session.GetIdentify(), "can not find ReconnectReady method, module: ", module)
 			return
 		}
 

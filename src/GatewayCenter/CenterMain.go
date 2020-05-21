@@ -6,10 +6,10 @@ package gatewaycenter
 */
 
 import (
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
-func main(){
-	Log.FmtPrintln("gateway center start.")
-	
+func main() {
+	akLog.FmtPrintln("gateway center start.")
+
 }

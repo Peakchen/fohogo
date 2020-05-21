@@ -8,7 +8,7 @@ package rpc
 */
 
 import (
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"encoding/json"
 	"reflect"
 )
@@ -30,7 +30,7 @@ var (
 func RegisterModuleRpc(name string, moduleName interface{}) {
 	module := reflect.ValueOf(moduleName)
 	if module.Kind() != reflect.Ptr {
-		Log.Error("module name: ", name, " which is not func type.")
+		akLog.Error("module name: ", name, " which is not func type.")
 		return
 	}
 
@@ -60,10 +60,10 @@ func RegisterModuleRpc(name string, moduleName interface{}) {
 	@param3: data 数据
 */
 func onModuleRpcProcess(moduleName, Rpcfunc string, data []byte) (succ bool, err error) {
-	Log.FmtPrintf("rpc process, rpc module: %v, func: %v.", moduleName, Rpcfunc)
+	akLog.FmtPrintf("rpc process, rpc module: %v, func: %v.", moduleName, Rpcfunc)
 	rpcdata := _moduleRpcMap[moduleName]
 	if rpcdata == nil {
-		Log.Error("can not find rpc module: ", moduleName)
+		akLog.Error("can not find rpc module: ", moduleName)
 		return
 	}
 
@@ -74,14 +74,14 @@ func onModuleRpcProcess(moduleName, Rpcfunc string, data []byte) (succ bool, err
 
 	funcobj := reflect.ValueOf(rpcdata.module).MethodByName(Rpcfunc)
 	if funcobj.IsNil() || !funcobj.IsValid() {
-		Log.Error("it is module: ", rpcdata.module, ", not find method: ", Rpcfunc)
+		akLog.Error("it is module: ", rpcdata.module, ", not find method: ", Rpcfunc)
 		return
 	}
 
 	dst := reflect.New(f.args[1].Elem()).Interface()
 	err = json.Unmarshal(data, dst)
 	if err != nil {
-		Log.Error("unmarshal data fail, Rpcfunc: ", Rpcfunc)
+		akLog.Error("unmarshal data fail, Rpcfunc: ", Rpcfunc)
 		return
 	}
 

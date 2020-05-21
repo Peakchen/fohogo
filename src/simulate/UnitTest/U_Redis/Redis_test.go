@@ -12,7 +12,7 @@ import (
 	//"github.com/globalsign/mgo/bson"
 	"github.com/gomodule/redigo/redis"
 	//"encoding/json"
-	"common/Log"
+	"github.com/Peakchen/xgameCommon/akLog"
 	"strconv"
 )
 
@@ -35,7 +35,7 @@ func DialDefaultServer() (redis.Conn, error) {
 }
 
 func Test1(t *testing.T) {
-	t.Log("[Test_1] start.")
+	t.akLog("[Test_1] start.")
 
 	c, err := DialDefaultServer()
 	if err != nil {
@@ -63,15 +63,15 @@ func Test1(t *testing.T) {
 	}
 
 	outdata1, err := redis.String(c.Do("GET", "key"))
-	t.Log("Do(GET, key) data: ", outdata1)
+	t.akLog("Do(GET, key) data: ", outdata1)
 
 	outdata2, err := redis.String(c.Do("HGET", "myh", "testval"))
-	t.Log("Do(HGET, key) data: ", outdata2)
+	t.akLog("Do(HGET, key) data: ", outdata2)
 	return
 }
 
 func Test2(t *testing.T) {
-	t.Log("[Test2] start.")
+	t.akLog("[Test2] start.")
 
 	c, err := DialDefaultServer()
 	if err != nil {
@@ -103,7 +103,7 @@ func Test2(t *testing.T) {
 		}
 	}
 
-	Log.FmtPrintf("now time: %v.", time.Unix(int64(t1), t2))
+	akLog.FmtPrintf("now time: %v.", time.Unix(int64(t1), t2))
 	return
 }
 

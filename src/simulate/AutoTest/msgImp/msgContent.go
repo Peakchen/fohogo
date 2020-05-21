@@ -1,7 +1,7 @@
 package msgImp
 
 import (
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"reflect"
 
 	"github.com/golang/protobuf/proto"
@@ -27,7 +27,7 @@ func init() {
 }
 
 func (this *TMsgContent) register(mainID, subID uint16, pb string, pbobj proto.Message) {
-	cmd := akNet.EncodeCmd(mainID, subID)
+	cmd := Kcpnet.EncodeCmd(mainID, subID)
 	this.Data[cmd] = &PbMsg{
 		Pb:  pb,
 		Msg: reflect.ValueOf(pbobj),

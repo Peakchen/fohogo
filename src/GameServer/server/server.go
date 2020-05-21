@@ -6,12 +6,12 @@ import (
 	"GameServer/LogicMsg"
 	"GameServer/dbo"
 	"GameServer/rpc"
-	"common/Config/LogicConfig"
-	"common/Config/serverConfig"
-	"common/Define"
-	"common/HotUpdate"
-	"common/ado/dbStatistics"
-	"common/akNet"
+	"github.com/Peakchen/xgameCommon/Config/LogicConfig"
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/define"
+	"github.com/Peakchen/xgameCommon/HotUpdate"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"flag"
 	"syscall"
 )
@@ -38,9 +38,9 @@ func StartServer() {
 		Recvsignal: syscall.SIGTERM,
 		HUCallback: reloadConfig,
 	})
-	gameSvr := akNet.NewClient(Gamecfg.Listenaddr,
+	gameSvr := Kcpnet.NewClient(Gamecfg.Listenaddr,
 		Gamecfg.Pprofaddr,
-		Define.ERouteId_ER_Game,
+		define.ERouteId_ER_Game,
 		nil,
 		Gamecfg.Name)
 

@@ -2,7 +2,7 @@ package UserAccount
 
 import (
 	"LoginServer/dbo"
-	"common/ado"
+	"github.com/Peakchen/xgameCommon/ado"
 
 	"github.com/globalsign/mgo/bson"
 )
