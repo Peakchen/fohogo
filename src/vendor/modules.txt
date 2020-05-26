@@ -1,4 +1,4 @@
-# github.com/Peakchen/xgameCommon v0.0.5
+# github.com/Peakchen/xgameCommon v0.0.6-0.20200526083055-edec48aaea51
 github.com/Peakchen/xgameCommon/akLog
 github.com/Peakchen/xgameCommon/Config/serverConfig
 github.com/Peakchen/xgameCommon/ado/dbStatistics
@@ -20,12 +20,12 @@ github.com/Peakchen/xgameCommon/HotUpdate
 github.com/Peakchen/xgameCommon/msgProto/MSG_Login
 github.com/Peakchen/xgameCommon/httpExService
 github.com/Peakchen/xgameCommon/httpsExServiceTLS
-github.com/Peakchen/xgameCommon/pprof
-github.com/Peakchen/xgameCommon/stacktrace
 github.com/Peakchen/xgameCommon/utls
 github.com/Peakchen/xgameCommon/Config
+github.com/Peakchen/xgameCommon/stacktrace
 github.com/Peakchen/xgameCommon/MgoConn
 github.com/Peakchen/xgameCommon/RedisConn
+github.com/Peakchen/xgameCommon/pprof
 github.com/Peakchen/xgameCommon/Cache
 # github.com/Shopify/sarama v1.26.4
 github.com/Shopify/sarama

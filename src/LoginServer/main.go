@@ -5,13 +5,35 @@
 package main
 
 import (
-	"LoginServer/server"
+	"LoginServer/LogicMsg"
+	"LoginServer/dbo"
+	"flag"
+
+	"github.com/Peakchen/xgameCommon/Config/serverConfig"
+	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
 	"github.com/Peakchen/xgameCommon/akLog"
 )
+
+func init() {
+	var CfgPath string
+	flag.StringVar(&CfgPath, "serverconfig", "serverconfig", "default path for configuration files")
+	serverConfig.LoadSvrAllConfig(CfgPath)
+	dbStatistics.InitDBStatistics()
+	LogicMsg.Init()
+}
 
 func main() {
 	akLog.FmtPrintln("start login server.")
 
-	server.StartServer()
+	logincfg := serverConfig.GLoginconfigConfig.Get()
+	server := logincfg.Zone + logincfg.No
+	dbo.StartDBSerice(server)
+	client := Kcpnet.NewKcpClient(logincfg.Listenaddr,
+		logincfg.Pprofaddr,
+		logincfg.Name)
+
+	client.Run()
+	dbStatistics.DBStatisticsStop()
 	return
 }

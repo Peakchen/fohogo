@@ -9,9 +9,10 @@ import (
 func StartClient() {
 	akLog.FmtPrintf("start InnerGateway client.")
 	Innergw := serverConfig.GInnergwconfigConfig.Get()
-	gameSvr := Kcpnet.NewKcpClient(Innergw.Name,
+	gameSvr := Kcpnet.NewKcpClient(
 		Innergw.Connectaddr,
-		Innergw.Pprofaddr)
+		Innergw.Pprofaddr,
+		Innergw.Name)
 
 	gameSvr.Run()
 }

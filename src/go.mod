@@ -1,4 +1,4 @@
-module fohogo
+module github.com/Peakchen/fohogo
 
 go 1.12
 
@@ -9,7 +9,7 @@ go 1.12
 // 更新到某个分支最新的代码 go get github.com/xx/xx@master
 
 require (
-	github.com/Peakchen/xgameCommon v0.0.5
+	github.com/Peakchen/xgameCommon v0.0.6-0.20200526083055-edec48aaea51
 	github.com/Shopify/sarama v1.26.4 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394 // indirect
@@ -32,8 +32,8 @@ require (
 	github.com/templexxx/cpufeat v0.0.0-20180724012125-cef66df7f161 // indirect
 	github.com/templexxx/xor v0.0.0-20191217153810-f85b25db303b // indirect
 	github.com/tjfoc/gmsm v1.3.0 // indirect
-	github.com/urfave/cli v1.22.4
-	github.com/xtaci/kcp-go v5.4.20+incompatible
+	github.com/urfave/cli v1.22.4 // indirect
+	github.com/xtaci/kcp-go v5.4.20+incompatible // indirect
 	github.com/xtaci/lossyconn v0.0.0-20200209145036-adba10fffc37 // indirect
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a
 )

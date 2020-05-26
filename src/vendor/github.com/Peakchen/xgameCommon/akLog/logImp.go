@@ -3,9 +3,6 @@ package akLog
 // add by stefan
 
 import (
-	"github.com/Peakchen/xgameCommon/aktime"
-	"github.com/Peakchen/xgameCommon/public"
-	"github.com/Peakchen/xgameCommon/utls"
 	"context"
 	"fmt"
 	"os"
@@ -14,6 +11,10 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/Peakchen/xgameCommon/aktime"
+	"github.com/Peakchen/xgameCommon/public"
+	"github.com/Peakchen/xgameCommon/utls"
 )
 
 type TAokoLog struct {
@@ -75,13 +76,13 @@ func initLogFile(logtype string, aokoLog *TAokoLog) {
 	filename := utls.GetExeFileName()
 	switch logtype {
 	case EnLogType_Info:
-		RealFileName = fmt.Sprintf("./logInfo/%v_Info_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
+		RealFileName = fmt.Sprintf("%v_Info_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
 	case EnLogType_Error:
-		RealFileName = fmt.Sprintf("./logError/%v_Error_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
+		RealFileName = fmt.Sprintf("%v_Error_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
 	case EnLogType_Fail:
-		RealFileName = fmt.Sprintf("./logFail/%v_Fail_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
+		RealFileName = fmt.Sprintf("%v_Fail_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
 	case EnLogType_Debug:
-		RealFileName = fmt.Sprintf("./logDebug/%v_Debug_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
+		RealFileName = fmt.Sprintf("%v_Debug_No%v_%v.log", filename, aokoLog.FileNo, aktime.Now().Local().Format(public.CstTimeDate))
 	default:
 
 	}
@@ -102,8 +103,9 @@ func initLogFile(logtype string, aokoLog *TAokoLog) {
 		}
 	}
 
-	filehandler, err := os.OpenFile(RealFileName, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+	filehandler, err := os.OpenFile(filepath+"/"+RealFileName, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
 	if err != nil {
+		panic("open file fail, err: " + err.Error())
 		return
 	}
 

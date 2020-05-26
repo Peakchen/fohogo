@@ -24,10 +24,10 @@ func StartServer() {
 	logincfg := serverConfig.GLoginconfigConfig.Get()
 	server := logincfg.Zone + logincfg.No
 	dbo.StartDBSerice(server)
-	gameSvr := Kcpnet.NewKcpClient(logincfg.Name,
+	client := Kcpnet.NewKcpClient(logincfg.Name,
 		logincfg.Listenaddr,
 		logincfg.Pprofaddr)
 
-	gameSvr.Run()
+	client.Run()
 	dbStatistics.DBStatisticsStop()
 }
