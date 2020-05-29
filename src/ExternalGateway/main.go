@@ -5,9 +5,8 @@ package main
 import (
 	"ExternalGateway/LogicMsg"
 	"ExternalGateway/ado"
+	"ExternalGateway/server"
 	"flag"
-
-	"github.com/Peakchen/xgameCommon/Kcpnet"
 
 	"github.com/Peakchen/xgameCommon/Config/serverConfig"
 	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
@@ -25,11 +24,6 @@ func init() {
 func main() {
 	akLog.FmtPrintf("start ExternalGateWay.")
 	ado.StartDBSerice("ExternalGateWay")
-	externalgw := serverConfig.GExternalgwconfigConfig.Get()
-	newExternalServer := Kcpnet.NewKcpServer(externalgw.Name,
-		externalgw.Listenaddr,
-		externalgw.Pprofaddr)
-
-	newExternalServer.Run()
+	server.Start()
 	dbStatistics.DBStatisticsStop()
 }

@@ -1,4 +1,4 @@
-# github.com/Peakchen/xgameCommon v0.0.6-0.20200526083055-edec48aaea51
+# github.com/Peakchen/xgameCommon v0.0.6-0.20200527031411-9e96268ad551
 github.com/Peakchen/xgameCommon/akLog
 github.com/Peakchen/xgameCommon/Config/serverConfig
 github.com/Peakchen/xgameCommon/ado/dbStatistics
@@ -135,9 +135,9 @@ github.com/urfave/cli
 # github.com/xtaci/kcp-go v5.4.20+incompatible
 github.com/xtaci/kcp-go
 # golang.org/x/crypto v0.0.0-20200204104054-c9f3fb736b72 => github.com/golang/crypto v0.0.0-20200429183012-4b2356b1ed79
+golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
-golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/salsa20
 golang.org/x/crypto/tea
 golang.org/x/crypto/twofish
