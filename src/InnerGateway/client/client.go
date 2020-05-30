@@ -4,6 +4,7 @@ import (
 	"github.com/Peakchen/xgameCommon/Config/serverConfig"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/define"
 )
 
 func StartClient() {
@@ -12,7 +13,8 @@ func StartClient() {
 	gameSvr := Kcpnet.NewKcpClient(
 		Innergw.Connectaddr,
 		Innergw.Pprofaddr,
-		Innergw.Name)
+		Innergw.Name,
+		define.ERouteId_ER_ISG)
 
 	gameSvr.Run()
 }

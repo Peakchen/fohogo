@@ -14,6 +14,7 @@ import (
 	"github.com/Peakchen/xgameCommon/HotUpdate"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
+	"github.com/Peakchen/xgameCommon/define"
 )
 
 func init() {
@@ -40,7 +41,8 @@ func StartServer() {
 	})
 	gameSvr := Kcpnet.NewKcpClient(Gamecfg.Name,
 		Gamecfg.Listenaddr,
-		Gamecfg.Pprofaddr)
+		Gamecfg.Pprofaddr,
+		define.ERouteId_ER_Game)
 
 	gameSvr.Run()
 	dbStatistics.DBStatisticsStop()

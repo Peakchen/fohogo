@@ -13,6 +13,7 @@ import (
 	"github.com/Peakchen/xgameCommon/Kcpnet"
 	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
 	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/define"
 )
 
 func init() {
@@ -31,7 +32,8 @@ func main() {
 	dbo.StartDBSerice(server)
 	client := Kcpnet.NewKcpClient(logincfg.Listenaddr,
 		logincfg.Pprofaddr,
-		logincfg.Name)
+		logincfg.Name,
+		define.ERouteId_ER_Login)
 
 	client.Run()
 	dbStatistics.DBStatisticsStop()
