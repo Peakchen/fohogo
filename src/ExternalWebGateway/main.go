@@ -6,8 +6,8 @@ package main
 
 import (
 	//"log"
-	"ExternalWebGateway/client"
-	"ExternalWebGateway/server"
+
+	"ExternalWebGateway/webserver"
 	"sync"
 
 	"github.com/Peakchen/xgameCommon/akLog"
@@ -20,8 +20,8 @@ func init() {
 func run() {
 	var sw sync.WaitGroup
 	sw.Add(2)
-	server.StartServer()
-	client.StartClient()
+	webserver.StartServer()
+	kcpserver.StartServer()
 	sw.Wait()
 }
 
