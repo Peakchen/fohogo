@@ -5,23 +5,18 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-
 	//"log"
-	"github.com/Peakchen/xgameCommon/tcpWebNet"
+	"github.com/Peakchen/xgameCommon/akLog"
+	"github.com/Peakchen/xgameCommon/akWebNet"
 )
 
 func init() {
 
 }
 
-var addr = flag.String("addr", "localhost:8080", "http service address")
-
 func main() {
-	fmt.Println("start ExternalWebGateway.")
-	flag.Parse()
-
+	akLog.FmtPrintln("start ExternalWebGateway.")
 	// start websock server.
-	tcpWebNet.StartWebSockSvr(*addr)
+	websvr := akWebNet.NewWebsocketSvr("172.0.0.1:8080")
+	websvr.Run()
 }

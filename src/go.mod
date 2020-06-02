@@ -9,7 +9,7 @@ go 1.12
 // 更新到某个分支最新的代码 go get github.com/xx/xx@master
 
 require (
-	github.com/Peakchen/xgameCommon v0.0.6-0.20200527031411-9e96268ad551
+	github.com/Peakchen/xgameCommon v0.0.6-0.20200530074613-6a23c5348608
 	github.com/Shopify/sarama v1.26.4 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394 // indirect
@@ -20,9 +20,10 @@ require (
 	github.com/golang/protobuf v1.4.2
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/gonutz/ide v0.0.0-20180502124734-e9fc8c14ed56 // indirect
-	github.com/gorilla/websocket v1.4.2
-	github.com/hashicorp/consul v1.7.3 // indirect
+	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/klauspost/reedsolomon v1.9.7 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/onsi/ginkgo v1.12.2 // indirect
 	github.com/prometheus/client_golang v1.6.0
 	github.com/satori/go.uuid v1.2.0 // indirect

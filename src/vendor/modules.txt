@@ -1,4 +1,4 @@
-# github.com/Peakchen/xgameCommon v0.0.6-0.20200527031411-9e96268ad551
+# github.com/Peakchen/xgameCommon v0.0.6-0.20200530074613-6a23c5348608
 github.com/Peakchen/xgameCommon/akLog
 github.com/Peakchen/xgameCommon/Config/serverConfig
 github.com/Peakchen/xgameCommon/ado/dbStatistics
@@ -11,6 +11,7 @@ github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule
 github.com/Peakchen/xgameCommon/msgProto/MSG_Server
 github.com/Peakchen/xgameCommon/ado/dbCache
 github.com/Peakchen/xgameCommon/aktime
+github.com/Peakchen/xgameCommon/akWebNet
 github.com/Peakchen/xgameCommon/msgProto/MSG_Player
 github.com/Peakchen/xgameCommon/ado
 github.com/Peakchen/xgameCommon/public
