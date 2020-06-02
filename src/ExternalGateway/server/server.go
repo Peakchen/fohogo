@@ -10,7 +10,7 @@ import (
 )
 
 func runKcpServer(sw *sync.WaitGroup) {
-	externalgw := serverConfig.GExternalgwconfigConfig.Get()
+	externalgw := serverConfig.GExternalgwconfigConfig.Get(0)
 	newkcpServer := Kcpnet.NewKcpServer(externalgw.Name,
 		externalgw.Listenaddr,
 		externalgw.Pprofaddr)
@@ -19,7 +19,7 @@ func runKcpServer(sw *sync.WaitGroup) {
 }
 
 func runTcpServer(sw *sync.WaitGroup) {
-	externalgw := serverConfig.GExternalgwconfigConfig.Get()
+	externalgw := serverConfig.GExternalgwconfigConfig.Get(0)
 	newtcpServer := akNet.NewTcpServer(
 		externalgw.Listenaddr,
 		externalgw.Pprofaddr,

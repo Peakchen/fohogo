@@ -31,7 +31,7 @@ func reloadConfig() {
 }
 
 func StartServer() {
-	Gamecfg := serverConfig.GGameconfigConfig.Get()
+	Gamecfg := serverConfig.GGameconfigConfig.Get(0)
 	server := Gamecfg.Zone + Gamecfg.No
 	dbo.StartDBSerice(server)
 	// for kill pid to emit signal to do action...

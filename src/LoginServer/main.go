@@ -27,7 +27,7 @@ func init() {
 func main() {
 	akLog.FmtPrintln("start login server.")
 
-	logincfg := serverConfig.GLoginconfigConfig.Get()
+	logincfg := serverConfig.GLoginconfigConfig.Get(0)
 	server := logincfg.Zone + logincfg.No
 	dbo.StartDBSerice(server)
 	client := Kcpnet.NewKcpClient(logincfg.Listenaddr,

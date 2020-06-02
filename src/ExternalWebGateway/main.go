@@ -6,17 +6,26 @@ package main
 
 import (
 	//"log"
+	"ExternalWebGateway/client"
+	"ExternalWebGateway/server"
+	"sync"
+
 	"github.com/Peakchen/xgameCommon/akLog"
-	"github.com/Peakchen/xgameCommon/akWebNet"
 )
 
 func init() {
 
 }
 
+func run() {
+	var sw sync.WaitGroup
+	sw.Add(2)
+	server.StartServer()
+	client.StartClient()
+	sw.Wait()
+}
+
 func main() {
 	akLog.FmtPrintln("start ExternalWebGateway.")
-	// start websock server.
-	websvr := akWebNet.NewWebsocketSvr("172.0.0.1:8080")
-	websvr.Run()
+	run()
 }

@@ -1,7 +1,7 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Peakchen/xgameCommon v0.0.5 h1:Uw/CmUNnFngHKEnyS0KIl6TQIiLgxjlHtDjpHqtJobI=
-github.com/Peakchen/xgameCommon v0.0.6-0.20200530074613-6a23c5348608 h1:K3dRGGe/ICgk74gtCrl2Ff7SBSwnVbJuPfnqveJuRlY=
-github.com/Peakchen/xgameCommon v0.0.6-0.20200530074613-6a23c5348608/go.mod h1:9JhX87Z8WLxWFT9CfLTCjKk+/DfIipk7EmGEq48RI0M=
+github.com/Peakchen/xgameCommon v0.0.6-0.20200602055436-8b5536d1464e h1:omBABUqqCbDeR5zYQNhIohEGCUVR+VOQG3QSsT5IlIg=
+github.com/Peakchen/xgameCommon v0.0.6-0.20200602055436-8b5536d1464e/go.mod h1:9JhX87Z8WLxWFT9CfLTCjKk+/DfIipk7EmGEq48RI0M=
 github.com/Shopify/sarama v1.26.4 h1:+17TxUq/PJEAfZAll0T7XJjSgQWCpaQSoki/x5yN8o8=
 github.com/Shopify/sarama v1.26.4/go.mod h1:NbSGBSSndYaIhRcBtY9V0U7AyH+x71bG668AuWys/yU=
 github.com/Shopify/toxiproxy v2.1.4+incompatible h1:TKdv8HiTLgE5wdJuEML90aBgNWsokNbMijUGhmcoBJc=

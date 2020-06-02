@@ -2,14 +2,14 @@ package U_Script
 
 import (
 	"fmt"
+	"reflect"
+	"testing"
+
 	"github.com/Peakchen/xgameCommon/Config/serverConfig"
 	"github.com/Peakchen/xgameCommon/RedisConn"
 	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/aktime"
 	"github.com/gomodule/redigo/redis"
-	"reflect"
-	"testing"
-	"time"
 )
 
 var (
@@ -31,7 +31,7 @@ func ExampleScript() {
 }
 
 func TestScript(t *testing.T) {
-	rediscfg := serverConfig.GRedisconfigConfig.Get()
+	rediscfg := serverConfig.GRedisconfigConfig.Get(0)
 	redisconn = RedisConn.NewRedisConn(rediscfg.Connaddr, rediscfg.DBIndex, rediscfg.Passwd)
 
 	c := redisconn.RedPool.Get()
@@ -65,7 +65,7 @@ func TestScript(t *testing.T) {
 }
 
 func TestScript1(t *testing.T) {
-	rediscfg := serverConfig.GRedisconfigConfig.Get()
+	rediscfg := serverConfig.GRedisconfigConfig.Get(0)
 	redisconn = RedisConn.NewRedisConn(rediscfg.Connaddr, rediscfg.DBIndex, rediscfg.Passwd)
 
 	c := redisconn.RedPool.Get()
