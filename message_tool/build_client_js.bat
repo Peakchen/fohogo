@@ -5,9 +5,9 @@ cd proto
 echo pb make start...
 setlocal enabledelayedexpansion
 for %%i in (*.proto) do ( 
-	  rem echo %%i 
+	  echo %%i 
 	  set jsname=%DIR%js\ 
-	  protoc -I %DIR%proto\  --js_out=!jsname! %%i
+	  protoc --js_out=import_style=commonjs,binary:!jsname! %%i
 )
 
 pause

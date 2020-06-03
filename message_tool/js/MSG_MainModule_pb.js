@@ -7,8 +7,11 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-goog.provide('proto.MSG_MainModule.MAINMSG');
+var jspb = require('google-protobuf');
+var goog = jspb;
+var global = Function('return this')();
 
+goog.exportSymbol('proto.MSG_MainModule.MAINMSG', null, global);
 /**
  * @enum {number}
  */
@@ -21,3 +24,4 @@ proto.MSG_MainModule.MAINMSG = {
   PLAYER: 11
 };
 
+goog.object.extend(exports, proto.MSG_MainModule);

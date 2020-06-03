@@ -7,8 +7,11 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-goog.provide('proto.ErrMessage.Err_message_id');
+var jspb = require('google-protobuf');
+var goog = jspb;
+var global = Function('return this')();
 
+goog.exportSymbol('proto.ErrMessage.Err_message_id', null, global);
 /**
  * @enum {number}
  */
@@ -20,3 +23,4 @@ proto.ErrMessage.Err_message_id = {
   MSG_ERR_NOT_FIND_USER: 4
 };
 
+goog.object.extend(exports, proto.ErrMessage);

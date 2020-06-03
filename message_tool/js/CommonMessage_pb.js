@@ -7,8 +7,11 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-goog.provide('proto.Define.ERouteId');
+var jspb = require('google-protobuf');
+var goog = jspb;
+var global = Function('return this')();
 
+goog.exportSymbol('proto.Define.ERouteId', null, global);
 /**
  * @enum {number}
  */
@@ -26,3 +29,4 @@ proto.Define.ERouteId = {
   ER_MAX: 10
 };
 
+goog.object.extend(exports, proto.Define);
