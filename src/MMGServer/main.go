@@ -1,10 +1,12 @@
 package main
 
 import (
+	"GameServer/LogicMsg"
 	"flag"
 
 	"github.com/Peakchen/xgameCommon/Config/serverConfig"
 	"github.com/Peakchen/xgameCommon/Kcpnet"
+	"github.com/Peakchen/xgameCommon/ado/dbStatistics"
 	"github.com/Peakchen/xgameCommon/akLog"
 )
 
@@ -12,6 +14,8 @@ func init() {
 	var cfgPath string
 	flag.StringVar(&cfgPath, "serverconfig", "serverconfig", "default path for configuration files")
 	serverConfig.LoadSvrAllConfig(cfgPath)
+	dbStatistics.InitDBStatistics()
+	LogicMsg.Init()
 }
 
 func runKcpServer() {

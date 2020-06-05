@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/Peakchen/xgameCommon/Config"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 /*
@@ -30,7 +31,7 @@ var (
 )
 
 func init() {
-	//loadExternalgwConfig()
+	akLog.FmtPrintln("load	ExternalGWConfig.json")
 }
 
 func loadExternalgwConfig() {

@@ -1,4 +1,4 @@
-# github.com/Peakchen/xgameCommon v0.0.6-0.20200605061718-fd2d7db1057b
+# github.com/Peakchen/xgameCommon v0.0.6-0.20200605084213-fe698d98be05
 github.com/Peakchen/xgameCommon/akLog
 github.com/Peakchen/xgameCommon/Config/serverConfig
 github.com/Peakchen/xgameCommon/ado/dbStatistics

@@ -18,4 +18,6 @@ call .\\windows\\make_dbserver.bat
 
 call .\\windows\\make_MMGServer.bat
 
+call .\\windows\\make_ExternalWebGateway.bat
+
 pause

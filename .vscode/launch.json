@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
     
+    
         {
             "name": "Launch",
             "type": "go",
@@ -17,7 +18,7 @@
             "env": {},
             "args": [],
             //"showLog": true,
-            "cwd": "D:\\aoko\\bin"
+            "cwd": "D:\\foho\\bin"
         }
     ]
 }

@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/Peakchen/xgameCommon/Config"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 /*
@@ -40,7 +41,7 @@ var (
 )
 
 func init() {
-	//loadGameConfig()
+	akLog.FmtPrintln("load	gameConfig.json")
 }
 
 func loadGameConfig() {

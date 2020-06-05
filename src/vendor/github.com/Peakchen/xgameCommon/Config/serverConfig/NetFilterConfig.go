@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/Peakchen/xgameCommon/Config"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 /*
@@ -33,7 +34,7 @@ var (
 )
 
 func init() {
-	//loadNetFilterConfig()
+	akLog.FmtPrintln("load	NetFilter.json")
 }
 
 func loadNetFilterConfig() {

@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/Peakchen/xgameCommon/Config"
+	"github.com/Peakchen/xgameCommon/akLog"
 )
 
 /*
@@ -35,6 +36,7 @@ var (
 )
 
 func init() {
+	akLog.FmtPrintln("load	centerConfig.json")
 }
 
 func loadCenterconfig() {
