@@ -16,4 +16,6 @@ call .\\windows\\make_loginserver.bat
 
 call .\\windows\\make_dbserver.bat
 
+call .\\windows\\make_MMGServer.bat
+
 pause

@@ -14,7 +14,8 @@ func StartClient() {
 		Innergw.Connectaddr,
 		Innergw.Pprofaddr,
 		Innergw.Name,
-		define.ERouteId_ER_ISG)
+		define.ERouteId_ER_ISG,
+		nil)
 
 	gameSvr.Run()
 }

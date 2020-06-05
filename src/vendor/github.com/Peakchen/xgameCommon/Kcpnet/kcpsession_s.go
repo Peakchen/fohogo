@@ -31,18 +31,20 @@ type KcpServerSession struct {
 	kcpConfig         *KcpSvrConfig
 	StrIdentify       string
 	Name              string
+	exCollection      *ExternalCollection //for external expand data
 }
 
-func NewKcpSvrSession(c net.Conn, offCh chan *KcpServerSession, kcpcfg *KcpSvrConfig) *KcpServerSession {
+func NewKcpSvrSession(c net.Conn, offCh chan *KcpServerSession, kcpcfg *KcpSvrConfig, exCol *ExternalCollection) *KcpServerSession {
 	return &KcpServerSession{
-		conn:       c,
-		readCh:     make(chan bool, 1000),
-		writeCh:    make(chan []byte, 1000),
-		RemoteAddr: c.RemoteAddr().String(),
-		pack:       &KcpServerProtocol{},
-		offCh:      offCh,
-		kcpConfig:  kcpcfg,
-		isAlive:    true,
+		conn:         c,
+		readCh:       make(chan bool, 1000),
+		writeCh:      make(chan []byte, 1000),
+		RemoteAddr:   c.RemoteAddr().String(),
+		pack:         &KcpServerProtocol{},
+		offCh:        offCh,
+		kcpConfig:    kcpcfg,
+		isAlive:      true,
+		exCollection: exCol,
 	}
 }
 
@@ -175,7 +177,10 @@ func (this *KcpServerSession) dispatch(responseCliented bool) (succ bool) {
 	if mainID != uint16(MSG_MainModule.MAINMSG_SERVER) && mainID != uint16(MSG_MainModule.MAINMSG_HEARTBEAT) &&
 		(this.SvrType == define.ERouteId_ER_ESG || this.SvrType == define.ERouteId_ER_ISG) {
 		if this.SvrType == define.ERouteId_ER_ESG {
-			succ = externalRouteAct(route, this, responseCliented)
+			succ = externalRouteAct(route, this, responseCliented, this.exCollection)
+			if succ {
+				this.exCollection.SetExternalClient(GClient2ServerSession)
+			}
 		} else {
 			succ = innerMsgRouteAct(akNet.ESessionType_Server, route, mainID, this.pack.GetSrcMsg())
 		}
@@ -241,7 +246,9 @@ func (this *KcpServerSession) SetIdentify(StrIdentify string) {
 }
 
 func (this *KcpServerSession) Offline() {
-
+	if this.SvrType == define.ERouteId_ER_ESG && this.exCollection.GetCenterClient() != nil {
+		sendCenterSvr4Leave(this, this.exCollection)
+	}
 }
 
 func (this *KcpServerSession) SendSvrClientMsg(mainid, subid uint16, msg proto.Message) (succ bool, err error) {
@@ -334,4 +341,8 @@ func (this *KcpServerSession) IsUser() bool {
 
 func (this *KcpServerSession) RefreshHeartBeat(mainid, subid uint16) bool {
 	return true
+}
+
+func (this *KcpServerSession) GetExternalCollection() *ExternalCollection {
+	return this.exCollection
 }

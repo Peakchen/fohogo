@@ -13,7 +13,8 @@ func runKcpServer(sw *sync.WaitGroup) {
 	externalgw := serverConfig.GExternalgwconfigConfig.Get(0)
 	newkcpServer := Kcpnet.NewKcpServer(externalgw.Name,
 		externalgw.Listenaddr,
-		externalgw.Pprofaddr)
+		externalgw.Pprofaddr,
+		nil)
 
 	newkcpServer.Run()
 }

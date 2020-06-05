@@ -33,7 +33,8 @@ func main() {
 	client := Kcpnet.NewKcpClient(logincfg.Listenaddr,
 		logincfg.Pprofaddr,
 		logincfg.Name,
-		define.ERouteId_ER_Login)
+		define.ERouteId_ER_Login,
+		nil)
 
 	client.Run()
 	dbStatistics.DBStatisticsStop()

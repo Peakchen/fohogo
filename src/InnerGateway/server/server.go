@@ -11,7 +11,8 @@ func StartServer() {
 	Innergw := serverConfig.GInnergwconfigConfig.Get(0)
 	newInnerServer := Kcpnet.NewKcpServer(Innergw.Name,
 		Innergw.Listenaddr,
-		Innergw.Pprofaddr)
+		Innergw.Pprofaddr,
+		nil)
 
 	newInnerServer.Run()
 }

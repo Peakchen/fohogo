@@ -42,7 +42,8 @@ func StartServer() {
 	gameSvr := Kcpnet.NewKcpClient(Gamecfg.Name,
 		Gamecfg.Listenaddr,
 		Gamecfg.Pprofaddr,
-		define.ERouteId_ER_Game)
+		define.ERouteId_ER_Game,
+		nil)
 
 	gameSvr.Run()
 	dbStatistics.DBStatisticsStop()

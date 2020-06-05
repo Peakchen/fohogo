@@ -14,9 +14,11 @@ import (
 	"github.com/Peakchen/xgameCommon/akLog"
 	"github.com/Peakchen/xgameCommon/akNet"
 	"github.com/Peakchen/xgameCommon/define"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_CenterGate"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_HeartBeat"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_Login"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
+	"github.com/Peakchen/xgameCommon/msgProto/MSG_Player"
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_Server"
 )
 
@@ -352,6 +354,7 @@ func sendUserClient(obj TcpSession) (succ bool) {
 			}
 			return true
 		})
+		succ = true
 	}
 
 	return
@@ -360,16 +363,54 @@ func sendUserClient(obj TcpSession) (succ bool) {
 /*
 	外网关路由 external gateway for message route (request and response).
 */
-func externalRouteAct(route define.ERouteId, obj TcpSession, responseCliented bool) (succ bool) {
+func externalRouteAct(route define.ERouteId, obj TcpSession, responseCliented bool, excol *ExternalCollection) (succ bool) {
 	//客户端请求消息 receive user client message.
 	if define.ERouteId(route) != define.ERouteId_ER_ISG && false == responseCliented {
 		akLog.FmtPrintf("external request, route: %v, StrIdentify: %v.", route, obj.GetIdentify())
 		// add session.
 		GClient2ServerSession.AddSession(obj.GetRemoteAddr(), obj)
+		//判断是否发送到中心网关
+		sendCenterSvr4Enter(obj, excol)
 		//内网关转发至相关服务器 route message to some one server.
 		return sendInnerSvr(obj)
 	}
 
 	//外网回复客户端消息 external gateway response user client message.
 	return sendUserClient(obj)
+}
+
+func sendCenterSvr4Enter(sess TcpSession, excol *ExternalCollection) {
+	mainID, SubID := sess.GetPack().GetMessageID()
+	if mainID != uint16(MSG_MainModule.MAINMSG_PLAYER) {
+		return
+	}
+	if SubID != uint16(MSG_Player.SUBMSG_CS_EnterServer) {
+		return
+	}
+	if excol.GetCenterClient() == nil {
+		return
+	}
+	ntf := &MSG_CenterGate.CS_PlayerOnline_Req{
+		PlayerIdentify: sess.GetPack().GetIdentify(),
+	}
+	akLog.FmtPrintln("player on line to center gate add player: ", sess.GetPack().GetIdentify())
+	data, err := sess.GetPack().PackClientMsg(uint16(MSG_MainModule.MAINMSG_CENTERGATE), uint16(MSG_CenterGate.SUBMSG_CS_PlayerOnline), ntf)
+	if err != nil {
+		akLog.Error(err)
+		return
+	}
+	excol.GetCenterClient().Send(data)
+}
+
+func sendCenterSvr4Leave(sess TcpSession, excol *ExternalCollection) {
+	ntf := &MSG_CenterGate.CS_PlayerOffline_Req{
+		PlayerIdentify: sess.GetPack().GetIdentify(),
+	}
+	akLog.FmtPrintln("player off line to center gate delete player: ", sess.GetPack().GetIdentify())
+	data, err := sess.GetPack().PackClientMsg(uint16(MSG_MainModule.MAINMSG_CENTERGATE), uint16(MSG_CenterGate.SUBMSG_CS_PlayerOffline), ntf)
+	if err != nil {
+		akLog.Error(err)
+		return
+	}
+	excol.GetCenterClient().Send(data)
 }
