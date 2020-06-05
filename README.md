@@ -3,7 +3,7 @@
 
 ## Implementation part  
   - Many functions inherit akogo  
-  - Multi-node from external network gateway to multi-node from internal network gateway, newly added data distribution center[MMS].
+  - Multi-node from external network gateway to multi-node from internal network gateway, newly added data distribution center[MMS].  
   - network by kcp.    
   - Continually updated...   
 ***
