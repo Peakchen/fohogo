@@ -2,7 +2,7 @@
 # fohogo is a game framework for arpg or rpg.
 
 ## Implementation part  
-  - Many functions inherit akogo  
+  - Many functions inherit [aokogo](https://github.com/Peakchen/aokogo "aokogo")   
   - Multi-node from external network gateway to multi-node from internal network gateway, newly added data distribution center[MMS].  
   - network by kcp.    
   - Continually updated...   
