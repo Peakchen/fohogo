@@ -10,6 +10,10 @@ import (
 	"github.com/Shopify/sarama"
 )
 
+/*
+	需要开启zookeeper和kafka进程
+*/
+
 func producer() {
 	config := sarama.NewConfig()
 	// 等待服务器所有副本都保存成功后的响应

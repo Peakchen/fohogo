@@ -28,6 +28,7 @@ func onGetSessions(session Kcpnet.TcpSession, req *MSG_CenterGate.CS_GetBroadCas
 			vkeys = []string{}
 		}
 		vkeys = append(vkeys, key)
+		sessionPlayers[pSess.GetRemoteAddr()] = vkeys
 	}
 	for sk, vPkeys := range sessionPlayers {
 		svrSess := session.GetCenterSession().GetSvrSession(sk)
