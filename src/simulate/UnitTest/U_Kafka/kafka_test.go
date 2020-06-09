@@ -2,6 +2,8 @@ package U_Kafka
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"sync"
 	"testing"
 	"time"
@@ -14,7 +16,21 @@ import (
 	需要开启zookeeper和kafka进程
 */
 
-func producer() {
+var (
+	host = "192.168.126.128:9092"
+)
+
+func TestKafka(t *testing.T) {
+	sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go producer()
+	go consumer()
+	wg.Wait()
+}
+
+func producer() (succ bool) {
+	akLog.FmtPrintln("begin producer...")
 	config := sarama.NewConfig()
 	// 等待服务器所有副本都保存成功后的响应
 	config.Producer.RequiredAcks = sarama.WaitForAll
@@ -23,9 +39,10 @@ func producer() {
 	// 是否等待成功和失败后的响应
 	config.Producer.Return.Successes = true
 	// 使用给定代理地址和配置创建一个同步生产者
-	producer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, config)
+	producer, err := sarama.NewSyncProducer([]string{host}, config)
 	if err != nil {
-		panic(err)
+		akLog.FmtPrintln("create producer err: ", err)
+		return
 	}
 	defer producer.Close()
 	//构建发送的消息，
@@ -34,38 +51,37 @@ func producer() {
 		Partition: int32(10),                   //
 		Key:       sarama.StringEncoder("key"), //
 	}
-
-	var value string
-	var msgType string
-	for {
-		_, err := fmt.Scanf("%s", &value)
-		if err != nil {
-			break
-		}
-		fmt.Scanf("%s", &msgType)
-		akLog.FmtPrintln("msgType = ", msgType, ",value = ", value)
-		msg.Topic = msgType
+	for i := 0; i < 10; i++ {
+		msg.Value = sarama.StringEncoder("this is a good test, hello kafka.")
 		partition, offset, err := producer.SendMessage(msg)
 		if err != nil {
 			akLog.FmtPrintln("Send message Fail")
+			return
 		}
 		akLog.FmtPrintf("Partition = %d, offset=%d\n", partition, offset)
+		time.Sleep(2 * time.Second)
 	}
+	succ = true
+	return
 }
 
-func consumer() {
+func consumer() (succ bool) {
+	akLog.FmtPrintln("begin consumer...")
 	var (
 		wg sync.WaitGroup
 	)
 	// 根据给定的代理地址和配置创建一个消费者
-	consumer, err := sarama.NewConsumer([]string{"localhost:9092"}, nil)
+	consumer, err := sarama.NewConsumer([]string{host}, nil)
 	if err != nil {
-		panic(err)
+		akLog.FmtPrintln("create consumer err: ", err)
+		return
 	}
+	defer consumer.Close()
 	//Partitions(topic):该方法返回了该topic的所有分区id
 	partitionList, err := consumer.Partitions("test")
 	if err != nil {
-		panic(err)
+		akLog.FmtPrintln("get Partitions err: ", err)
+		return
 	}
 
 	for partition := range partitionList {
@@ -74,7 +90,8 @@ func consumer() {
 		//sarama.OffsetNewest:表明了为最新消息
 		pc, err := consumer.ConsumePartition("test", int32(partition), sarama.OffsetNewest)
 		if err != nil {
-			panic(err)
+			akLog.FmtPrintln("get consumer Partitions err: ", err)
+			return
 		}
 		defer pc.AsyncClose()
 		wg.Add(1)
@@ -87,12 +104,6 @@ func consumer() {
 		}(pc)
 	}
 	wg.Wait()
-	consumer.Close()
-}
-
-func TestKafka(t *testing.T) {
-	producer()
-	time.Sleep(5 * time.Second)
-	consumer()
-	time.Sleep(5 * time.Second)
+	succ = true
+	return
 }
