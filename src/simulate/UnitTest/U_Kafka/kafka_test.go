@@ -1,10 +1,13 @@
 package U_Kafka
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
 	"sync"
+	"syscall"
 	"testing"
 	"time"
 
@@ -20,17 +23,17 @@ var (
 	host = "192.168.126.128:9092"
 )
 
-func TestKafka(t *testing.T) {
+func TestSyncKafka(t *testing.T) {
 	sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
 	var wg sync.WaitGroup
 	wg.Add(2)
-	go producer()
+	go syncProducer()
 	go consumer()
 	wg.Wait()
 }
 
-func producer() (succ bool) {
-	akLog.FmtPrintln("begin producer...")
+func syncProducer() (succ bool) {
+	akLog.FmtPrintln("begin syncProducer...")
 	config := sarama.NewConfig()
 	// 等待服务器所有副本都保存成功后的响应
 	config.Producer.RequiredAcks = sarama.WaitForAll
@@ -106,4 +109,109 @@ func consumer() (succ bool) {
 	wg.Wait()
 	succ = true
 	return
+}
+
+func TestASyncKafka(t *testing.T) {
+	sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go asyncProducer()
+	go asyncConsumer()
+	wg.Wait()
+}
+
+func asyncProducer() (succ bool) {
+	akLog.FmtPrintln("begin asyncProducer...")
+	config := sarama.NewConfig()
+	config.Producer.RequiredAcks = sarama.NoResponse                          // Only wait for the leader to ack
+	config.Producer.Compression = sarama.CompressionSnappy                    // Compress messages
+	config.Producer.Flush.Frequency = time.Duration(10000) * time.Millisecond // Flush batches every 500ms
+	config.Producer.Partitioner = sarama.NewRandomPartitioner
+	producer, err := sarama.NewAsyncProducer([]string{host}, config)
+	if err != nil {
+		akLog.FmtPrintln("create producer err: ", err)
+		return
+	}
+	defer producer.AsyncClose()
+
+	for i := 0; i < 10; i++ {
+		akLog.FmtPrintln("produce msg... num: ", i)
+		//构建发送的消息
+		msg := &sarama.ProducerMessage{
+			Topic:     "test",                      //包含了消息的主题
+			Partition: int32(10),                   //
+			Key:       sarama.StringEncoder("key"), //
+		}
+		msg.Value = sarama.StringEncoder(fmt.Sprintf("this is a good test, hello kafka, num: %v.", i))
+		producer.Input() <- msg
+		//time.Sleep(1 * time.Second)
+	}
+	succ = true
+	akLog.FmtPrintln("end asyncProducer...")
+	return
+}
+
+func asyncConsumer() (succ bool) {
+	akLog.FmtPrintln("begin asyncConsumer...")
+	// 根据给定的代理地址和配置创建一个消费者
+	config := sarama.NewConfig()
+	config.Consumer.Return.Errors = true
+	config.Consumer.Offsets.Initial = sarama.OffsetNewest
+	config.Consumer.Offsets.CommitInterval = 10
+	config.Consumer.Offsets.AutoCommit.Enable = true
+	config.Consumer.Offsets.AutoCommit.Interval = 2
+	config.Version = sarama.V2_5_0_0
+	ctx, cancel := context.WithCancel(context.Background())
+	client, err := sarama.NewConsumerGroup([]string{host}, "test-consumer-group", config)
+	if err != nil {
+		akLog.FmtPrintln("create ConsumerGroup err: ", err)
+		return
+	}
+
+	consumer := &AsyncConsumer{}
+	go func() {
+		for {
+			err := client.Consume(ctx, []string{"test"}, consumer)
+			if err != nil {
+				akLog.FmtPrintln("client.Consume error=[%v]", err.Error())
+				// 5秒后重试
+				time.Sleep(time.Second * 5)
+			}
+		}
+	}()
+
+	// os signal
+	sigterm := make(chan os.Signal, 1)
+	signal.Notify(sigterm, syscall.SIGINT, syscall.SIGTERM)
+	<-sigterm
+	cancel()
+	err = client.Close()
+	if err != nil {
+		panic(err)
+	}
+	succ = true
+	akLog.FmtPrintln("end asyncConsumer...")
+	return
+}
+
+type AsyncConsumer struct {
+}
+
+func (consumer *AsyncConsumer) Setup(s sarama.ConsumerGroupSession) error {
+	return nil
+}
+
+func (consumer *AsyncConsumer) Cleanup(s sarama.ConsumerGroupSession) error {
+	return nil
+}
+
+func (consumer *AsyncConsumer) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
+	for message := range claim.Messages() {
+		key := string(message.Key)
+		val := string(message.Value)
+		akLog.FmtPrintf("key:%s, val:%s.\n", key, val)
+		session.MarkMessage(message, "")
+	}
+
+	return nil
 }
