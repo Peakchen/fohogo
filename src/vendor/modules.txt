@@ -1,4 +1,4 @@
-# github.com/Peakchen/xgameCommon v0.0.6-0.20200605084213-fe698d98be05
+# github.com/Peakchen/xgameCommon v0.0.6-0.20200610063901-bc6ab28413d9
 github.com/Peakchen/xgameCommon/akLog
 github.com/Peakchen/xgameCommon/Config/serverConfig
 github.com/Peakchen/xgameCommon/ado/dbStatistics
@@ -149,13 +149,13 @@ golang.org/x/crypto/internal/subtle
 golang.org/x/crypto/salsa20/salsa
 golang.org/x/crypto/md4
 # golang.org/x/net v0.0.0-20200520004742-59133d7f0dd7 => github.com/golang/net v0.0.0-20200506145744-7e3656a0809f
+golang.org/x/net/proxy
 golang.org/x/net/ipv4
 golang.org/x/net/ipv6
-golang.org/x/net/proxy
+golang.org/x/net/internal/socks
 golang.org/x/net/bpf
 golang.org/x/net/internal/iana
 golang.org/x/net/internal/socket
-golang.org/x/net/internal/socks
 # golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a => github.com/golang/sync v0.0.0-20200317015054-43a5402ce75a
 golang.org/x/sync/singleflight
 # golang.org/x/sys v0.0.0-20200519105757-fe76b779f299 => github.com/golang/sys v0.0.0-20200509044756-6aff5f38e54f

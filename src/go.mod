@@ -9,8 +9,8 @@ go 1.12
 // 更新到某个分支最新的代码 go get github.com/xx/xx@master
 
 require (
-	github.com/Peakchen/xgameCommon v0.0.6-0.20200605084213-fe698d98be05
-	github.com/Shopify/sarama v1.26.4 // indirect
+	github.com/Peakchen/xgameCommon v0.0.6-0.20200610063901-bc6ab28413d9
+	github.com/Shopify/sarama v1.26.4
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394 // indirect
 	github.com/bsm/sarama-cluster v2.1.15+incompatible // indirect
