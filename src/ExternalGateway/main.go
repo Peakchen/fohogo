@@ -16,6 +16,7 @@ import (
 func init() {
 	var CfgPath string
 	flag.StringVar(&CfgPath, "serverconfig", "serverconfig", "default path for configuration files")
+	akLog.InitLogBroker([]string{"192.168.126.128:9092"})
 	serverConfig.LoadSvrAllConfig(CfgPath)
 	dbStatistics.InitDBStatistics()
 	LogicMsg.Init()

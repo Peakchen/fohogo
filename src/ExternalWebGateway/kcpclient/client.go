@@ -28,6 +28,7 @@ func StartKcpClient(sw *sync.WaitGroup, excol *Kcpnet.ExternalCollection) {
 		externalgw.Pprofaddr,
 		externalgw.Name,
 		define.ERouteId_ER_ESG,
+		externalgw.Id,
 		excol)
 
 	newtcpClient.Run()

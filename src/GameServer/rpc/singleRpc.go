@@ -54,7 +54,7 @@ func RegisterRpc(name string, funcName interface{}) {
 	@param1: session obj
 	@param2: module, func, data
 */
-func SendRpcMsg(session Kcpnet.TcpSession, module, funcName string, data interface{}) {
+func SendRpcMsg(session Kcpnet.TSession, module, funcName string, data interface{}) {
 	rsp := &MSG_Rpc.CS_Rpc_Req{}
 	rsp.Rpcmodule = module
 	rsp.Rpcfunc = funcName

@@ -8,7 +8,7 @@ import (
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_Player"
 )
 
-func onGetPlayerInfo(session Kcpnet.TcpSession, req *MSG_Player.CS_PlayerInfo_Req) (succ bool, err error) {
+func onGetPlayerInfo(session Kcpnet.TSession, req *MSG_Player.CS_PlayerInfo_Req) (succ bool, err error) {
 	akLog.FmtPrintf("[onGetPlayerInfo] SessionID: %v.", session.GetIdentify())
 
 	rsp := &MSG_Player.SC_PlayerInfo_Rsp{}

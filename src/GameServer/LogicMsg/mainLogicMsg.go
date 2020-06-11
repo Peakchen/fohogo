@@ -12,7 +12,7 @@ func Init() {
 
 }
 
-func onEnterServer(session Kcpnet.TcpSession, req *MSG_Player.CS_EnterServer_Req) (succ bool, err error) {
+func onEnterServer(session Kcpnet.TSession, req *MSG_Player.CS_EnterServer_Req) (succ bool, err error) {
 	akLog.FmtPrintf("enter Server player(%v) enter game server.", session.GetIdentify())
 	logic.EnterGameReady(session)
 	rsp := &MSG_Player.SC_EnterServer_Rsp{}
@@ -22,7 +22,7 @@ func onEnterServer(session Kcpnet.TcpSession, req *MSG_Player.CS_EnterServer_Req
 		rsp)
 }
 
-func onLeaveServer(session Kcpnet.TcpSession, req *MSG_Player.CS_LeaveServer_Req) (succ bool, err error) {
+func onLeaveServer(session Kcpnet.TSession, req *MSG_Player.CS_LeaveServer_Req) (succ bool, err error) {
 	akLog.FmtPrintf("leave Server player(%v).", session.GetIdentify())
 	return true, nil
 }

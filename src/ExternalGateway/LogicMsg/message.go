@@ -23,7 +23,7 @@ func ExternalGatewayMessageCallBack(c net.Conn, mainID uint16, subID uint16, msg
 	akLog.FmtPrintf("exec external gateway server message call back: %v, %v.", c.RemoteAddr(), c.LocalAddr())
 }
 
-func onSvrRegister(session Kcpnet.TcpSession, req *MSG_Server.CS_ServerRegister_Req) (succ bool, err error) {
+func onSvrRegister(session Kcpnet.TSession, req *MSG_Server.CS_ServerRegister_Req) (succ bool, err error) {
 	akLog.FmtPrintf("onSvrRegister, StrIdentify: %v, recv: %v.", session.GetIdentify(), req.ServerType)
 	var (
 		msgfmt string
@@ -40,12 +40,12 @@ func onSvrRegister(session Kcpnet.TcpSession, req *MSG_Server.CS_ServerRegister_
 	return Kcpnet.RegisterMessageRet(session)
 }
 
-func onHeartBeat(session Kcpnet.TcpSession, req *MSG_HeartBeat.CS_HeartBeat_Req) (succ bool, err error) {
+func onHeartBeat(session Kcpnet.TSession, req *MSG_HeartBeat.CS_HeartBeat_Req) (succ bool, err error) {
 	return Kcpnet.ResponseHeartBeat(session)
 }
 
 // find gate way player session then broadcast msg.
-func onGetBroadCastData(session Kcpnet.TcpSession, rsp *MSG_CenterGate.SC_GetBroadCastSessions_Rsp) (succ bool, err error) {
+func onGetBroadCastData(session Kcpnet.TSession, rsp *MSG_CenterGate.SC_GetBroadCastSessions_Rsp) (succ bool, err error) {
 	excol := session.GetExternalCollection()
 	for _, pk := range rsp.PlayerIdentifys {
 		pSess := excol.GetExternalClient().GetSession(pk)

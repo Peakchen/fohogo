@@ -7,9 +7,9 @@ import "github.com/Peakchen/xgameCommon/Kcpnet"
 	date: 20191111 16:08
 */
 type ILogicReady interface {
-	EnterReady(session Kcpnet.TcpSession)
-	LeaveReady(session Kcpnet.TcpSession)
-	ReconnectReady(session Kcpnet.TcpSession)
+	EnterReady(session Kcpnet.TSession)
+	LeaveReady(session Kcpnet.TSession)
+	ReconnectReady(session Kcpnet.TSession)
 }
 
 var (

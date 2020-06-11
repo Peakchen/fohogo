@@ -21,7 +21,7 @@ func InnerGatewayMessageCallBack(c net.Conn, mainID uint16, subID uint16, msg pr
 	akLog.FmtPrintf("exec [innter gateway] server message call back.", c.RemoteAddr(), c.LocalAddr())
 }
 
-func onSvrRegister(session Kcpnet.TcpSession, req *MSG_Server.CS_ServerRegister_Req) (succ bool, err error) {
+func onSvrRegister(session Kcpnet.TSession, req *MSG_Server.CS_ServerRegister_Req) (succ bool, err error) {
 	akLog.FmtPrintf("onSvrRegister: StrIdentify: %v, recv: %v.", session.GetIdentify(), req.ServerType)
 	var (
 		msgfmt string
@@ -44,7 +44,7 @@ func onSvrRegister(session Kcpnet.TcpSession, req *MSG_Server.CS_ServerRegister_
 		rsp)
 }
 
-func onHeartBeat(session Kcpnet.TcpSession, req *MSG_HeartBeat.CS_HeartBeat_Req) (succ bool, err error) {
+func onHeartBeat(session Kcpnet.TSession, req *MSG_HeartBeat.CS_HeartBeat_Req) (succ bool, err error) {
 	return Kcpnet.ResponseHeartBeat(session)
 }
 

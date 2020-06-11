@@ -7,7 +7,7 @@ import (
 )
 
 // after player login, need getting ready.
-func EnterGameReady(session Kcpnet.TcpSession) {
+func EnterGameReady(session Kcpnet.TSession) {
 	params := []reflect.Value{reflect.ValueOf(session)}
 	for module, obj := range GEnterReadyModule {
 		enter := reflect.ValueOf(obj).MethodByName("EnterReady")
@@ -21,7 +21,7 @@ func EnterGameReady(session Kcpnet.TcpSession) {
 }
 
 //before leave, get ready.
-func LeaveGameReady(session Kcpnet.TcpSession) {
+func LeaveGameReady(session Kcpnet.TSession) {
 	params := []reflect.Value{reflect.ValueOf(session)}
 	for module, obj := range GLeaveReadyModule {
 		enter := reflect.ValueOf(obj).MethodByName("LeaveReady")
@@ -35,7 +35,7 @@ func LeaveGameReady(session Kcpnet.TcpSession) {
 }
 
 //broken link reconnct enter game ready.
-func ReconnectEnterReady(session Kcpnet.TcpSession) {
+func ReconnectEnterReady(session Kcpnet.TSession) {
 	params := []reflect.Value{reflect.ValueOf(session)}
 	for module, obj := range GReconnReadyModule {
 		enter := reflect.ValueOf(obj).MethodByName("ReconnectReady")

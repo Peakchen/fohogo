@@ -15,6 +15,7 @@ func runKcpServer(sw *sync.WaitGroup, excol *Kcpnet.ExternalCollection) {
 	newkcpServer := Kcpnet.NewKcpServer(externalgw.Name,
 		externalgw.Listenaddr,
 		externalgw.Pprofaddr,
+		define.ERouteId_ER_ESG,
 		excol)
 
 	newkcpServer.Run()
@@ -50,6 +51,7 @@ func runKcpClient(sw *sync.WaitGroup, excol *Kcpnet.ExternalCollection) {
 		externalgw.Pprofaddr,
 		externalgw.Name,
 		define.ERouteId_ER_ESG,
+		externalgw.Id,
 		excol)
 
 	newtcpClient.Run()

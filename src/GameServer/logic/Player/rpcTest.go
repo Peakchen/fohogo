@@ -29,7 +29,7 @@ func (this *TPlayerUpdateRpc) GetPlayerInfo(info *TPlayerInfoTest) {
 	akLog.FmtPrintln("recv module rpc msg, info content: ", info.Content)
 }
 
-func RunModuleRpc4GetPlayerInfoTest(session Kcpnet.TcpSession, module, funcName string) {
+func RunModuleRpc4GetPlayerInfoTest(session Kcpnet.TSession, module, funcName string) {
 	info := &TPlayerInfoTest{
 		Content: "hi，stefan.",
 	}
@@ -37,7 +37,7 @@ func RunModuleRpc4GetPlayerInfoTest(session Kcpnet.TcpSession, module, funcName 
 	rpc.SendRpcMsg(session, module, funcName, info)
 }
 
-func RunRpc4GetPlayerInfoTest(session Kcpnet.TcpSession, funcName string) {
+func RunRpc4GetPlayerInfoTest(session Kcpnet.TSession, funcName string) {
 	info := &TPlayerInfoTest{
 		Content: "hi，stefan.",
 	}

@@ -46,6 +46,7 @@ func StartServer() {
 		Gamecfg.Pprofaddr,
 		Gamecfg.Name,
 		define.ERouteId_ER_Game,
+		Gamecfg.Id,
 		nil)
 
 	gameSvr.Run()

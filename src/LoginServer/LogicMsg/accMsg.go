@@ -14,7 +14,7 @@ func onUserBind(key string, req *MSG_Login.CS_UserBind_Req) (succ bool, err erro
 	return
 }
 
-func onUserRegister(session Kcpnet.TcpSession, req *MSG_Login.CS_UserRegister_Req) (succ bool, err error) {
+func onUserRegister(session Kcpnet.TSession, req *MSG_Login.CS_UserRegister_Req) (succ bool, err error) {
 	akLog.FmtPrintf("[onUserRegister] name: %v, identify: %v, Account: %v, Passwd: %v, DeviceSerial: %v, DeviceName: %v.", session.GetModuleName(), session.GetIdentify(), req.Account, req.Passwd, req.DeviceSerial, req.DeviceName)
 	rsp := &MSG_Login.SC_UserRegister_Rsp{}
 	rsp.Ret = MSG_Login.ErrorCode_Success
@@ -37,7 +37,7 @@ func onUserRegister(session Kcpnet.TcpSession, req *MSG_Login.CS_UserRegister_Re
 		rsp)
 }
 
-func onUserLogin(session Kcpnet.TcpSession, req *MSG_Login.CS_Login_Req) (succ bool, err error) {
+func onUserLogin(session Kcpnet.TSession, req *MSG_Login.CS_Login_Req) (succ bool, err error) {
 	akLog.FmtPrintf("[onUserLogin] identify: %v, Account: %v, Passwd: %v, DeviceSerial: %v, DeviceName: %v.", session.GetIdentify(), req.Account, req.Passwd, req.DeviceSerial, req.DeviceName)
 
 	rsp := &MSG_Login.SC_Login_Rsp{}

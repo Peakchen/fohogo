@@ -6,17 +6,17 @@ import (
 	"github.com/Peakchen/xgameCommon/msgProto/MSG_MainModule"
 )
 
-func onEnter(session Kcpnet.TcpSession, req *MSG_CenterGate.CS_PlayerOnline_Req) (succ bool, err error) {
+func onEnter(session Kcpnet.TSession, req *MSG_CenterGate.CS_PlayerOnline_Req) (succ bool, err error) {
 	session.GetCenterSession().AddPlayerSession(req.PlayerIdentify, session)
 	return true, nil
 }
 
-func onLeave(session Kcpnet.TcpSession, req *MSG_CenterGate.CS_PlayerOffline_Req) (succ bool, err error) {
+func onLeave(session Kcpnet.TSession, req *MSG_CenterGate.CS_PlayerOffline_Req) (succ bool, err error) {
 	session.GetCenterSession().ClearPlayerSession(req.PlayerIdentify)
 	return true, nil
 }
 
-func onGetSessions(session Kcpnet.TcpSession, req *MSG_CenterGate.CS_GetBroadCastSessions_Req) (succ bool, err error) {
+func onGetSessions(session Kcpnet.TSession, req *MSG_CenterGate.CS_GetBroadCastSessions_Req) (succ bool, err error) {
 	sessionPlayers := map[string][]string{}
 	for _, key := range req.PlayerIdentifys {
 		pSess := session.GetCenterSession().GetPlayerSession(key)

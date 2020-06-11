@@ -23,7 +23,7 @@ func Init() {
 	@param1: session obj
 	@param2: req content (module, func, data)
 */
-func onRpcProcess(session Kcpnet.TcpSession, req *MSG_Rpc.CS_Rpc_Req) (succ bool, err error) {
+func onRpcProcess(session Kcpnet.TSession, req *MSG_Rpc.CS_Rpc_Req) (succ bool, err error) {
 	akLog.FmtPrintf("rpc process, rpc module: %v, func: %v.", req.Rpcmodule, req.Rpcfunc)
 	if len(req.Rpcmodule) == 0 {
 		succ, err = onSingleRpc(req.Rpcfunc, req.Data)

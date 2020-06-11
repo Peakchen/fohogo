@@ -9,7 +9,7 @@ import (
 type TPlayerReady struct {
 }
 
-func (this *TPlayerReady) EnterReady(session Kcpnet.TcpSession) {
+func (this *TPlayerReady) EnterReady(session Kcpnet.TSession) {
 	akLog.FmtPrintln("enter ready.")
 	player := GetPlayer(session.GetIdentify())
 	if player == nil {
@@ -22,11 +22,11 @@ func (this *TPlayerReady) EnterReady(session Kcpnet.TcpSession) {
 	//RunRpc4GetPlayerInfoTest(session, cstRpcFunc_GetPlayerInfo)
 }
 
-func (this *TPlayerReady) LeaveReady(session Kcpnet.TcpSession) {
+func (this *TPlayerReady) LeaveReady(session Kcpnet.TSession) {
 
 }
 
-func (this *TPlayerReady) ReconnectReady(session Kcpnet.TcpSession) {
+func (this *TPlayerReady) ReconnectReady(session Kcpnet.TSession) {
 
 }
 
