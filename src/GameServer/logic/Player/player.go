@@ -16,8 +16,9 @@ import (
 type TPlayer struct {
 	ado.IDBModule
 
-	BaseInfo  map[MSG_Player.EmBaseInfo]interface{}  //基础玩家信息
-	BaseMoney map[MSG_Player.EmBaseMoney]interface{} //基础金币类信息
+	Name string
+	BaseInfo  map[MSG_Player.EmBaseInfo]uint32  //基础玩家信息
+	BaseMoney map[MSG_Player.EmBaseMoney]uint64 //基础金币类信息
 }
 
 func (this *TPlayer) Identify() string {
@@ -43,8 +44,8 @@ func GetPlayer(Identify string) (player *TPlayer) {
 	if !exist {
 		// ... data init, then insert cache and db.
 		player.StrIdentify = Identify
-		player.BaseInfo = map[MSG_Player.EmBaseInfo]interface{}{}
-		player.BaseMoney = map[MSG_Player.EmBaseMoney]interface{}{}
+		player.BaseInfo = map[MSG_Player.EmBaseInfo]uint32{}
+		player.BaseMoney = map[MSG_Player.EmBaseMoney]uint64{}
 		player.initdata()
 		err = dbo.A_DBInsert(Identify, player)
 		if err != nil {
@@ -57,7 +58,7 @@ func GetPlayer(Identify string) (player *TPlayer) {
 
 func (this *TPlayer) initdata() {
 	// base info
-	this.BaseInfo[MSG_Player.EmBaseInfo_Name] = "嘿嘿嘿"
+	this.Name = "嘿嘿嘿"
 	this.BaseInfo[MSG_Player.EmBaseInfo_Level] = 1
 	this.BaseInfo[MSG_Player.EmBaseInfo_HeadIcon] = 101
 	this.BaseInfo[MSG_Player.EmBaseInfo_DBID] = 1001
